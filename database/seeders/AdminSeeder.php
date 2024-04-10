@@ -15,6 +15,7 @@ class AdminSeeder extends Seeder
     {
         for($i = 1; $i < 4; $i++) {
             $admin = new Admin();
+            $admin->id_admin = $i;
             $admin->username = 'admin_' . $i;
             $admin->password = fake()->password();
             $admin->id_kecamatan = $i;

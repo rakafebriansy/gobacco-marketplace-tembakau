@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jenis_tembakaus', function (Blueprint $table) {
             $table->bigIncrements('id_jenis_tembakau')->nullable(false);
             $table->string('jenis_tembakau',100)->nullable(false);
+            $table->string('gmb_tembakau',100)->nullable(false);
         });
     }
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jenis_pengujians', function (Blueprint $table) {
             $table->bigIncrements('id_pengujian')->nullable(false);
             $table->string('jenis_pengujian',100)->nullable(false);
+            $table->integer('harga_uji')->nullable(false);
             $table->unsignedBigInteger('id_pemerintah')->nullable();
         });
     }

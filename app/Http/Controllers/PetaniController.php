@@ -14,7 +14,7 @@ class PetaniController extends Controller
 {
     public function register()
     {
-        return view('petani.register', [
+        return view('petani.login1', [
             'title' => 'Petani | Register'
         ]);
     }

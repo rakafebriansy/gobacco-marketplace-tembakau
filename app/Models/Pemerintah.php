@@ -17,6 +17,13 @@ class Pemerintah extends Model
     protected $keyType = 'int';
     public $incrementing = true;
     public $timestamps = false;
+    protected $fillable = [
+        'username_pemerintah',
+        'pw_pemerintah',
+        'email_pemerintah',
+        'telp_pemerintah',
+        'id_kecamatan'
+    ];
     public function kecamatan(): BelongsTo
     {
         return $this->belongsTo(Kecamatan::class, 'id_kecamatan', 'id_kecamatan');

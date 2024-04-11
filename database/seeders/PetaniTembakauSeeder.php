@@ -13,6 +13,19 @@ class PetaniTembakauSeeder extends Seeder
      */
     public function run(): void
     {
-        PetaniTembakau::factory(5)->create();
+        for($i = 1; $i < 6; $i++) {
+            $petani_tembakau = new PetaniTembakau();
+            $petani_tembakau->id_petani = $i;
+            $petani_tembakau->nama_petani = fake()->name();
+            $petani_tembakau->username_petani = fake()->userName();
+            $petani_tembakau->pw_petani = fake()->password();
+            $petani_tembakau->email_petani = fake()->email();
+            $petani_tembakau->id_jenis_kelamin = fake()->numberBetween(1,2);
+            $petani_tembakau->alamat_petani = fake()->address();
+            $petani_tembakau->id_kecamatan = fake()->numberBetween(1,3);
+            $petani_tembakau->telp_petani = fake()->phoneNumber();
+            $petani_tembakau->noktp_petani = fake()->unique()->randomNumber();
+            $petani_tembakau->save();
+        }
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('petani_tembakaus', function (Blueprint $table) {
             $table->bigIncrements('id_petani')->nullable(false);
             $table->string('nama_petani',100)->nullable(false);
-            $table->string('username_petani',100)->nullable(false);
+            $table->string('username_petani',100)->nullable(false)->unique();
             $table->string('pw_petani',100)->nullable(false);
             $table->string('email_petani',100)->nullable(false);
             $table->unsignedBigInteger('id_jenis_kelamin')->nullable(false);

@@ -17,6 +17,11 @@ class Admin extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $fillable = [
+        'username',
+        'password',
+        'id_kecamatan'
+    ];
     public function kecamatan(): BelongsTo
     {
         return $this->belongsTo(Kecamatan::class,'id_kecamatan','id_kecamatan');

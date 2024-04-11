@@ -13,13 +13,20 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 4; $i++) {
-            $admin = new Admin();
-            $admin->id_admin = $i;
-            $admin->username = 'admin_' . $i;
-            $admin->password = fake()->password();
-            $admin->id_kecamatan = $i;
-            $admin->save();
-        }
+        // for($i = 1; $i < 4; $i++) {
+        //     $admin = new Admin();
+        //     $admin->id_admin = $i;
+        //     $admin->username = 'admin_' . $i;
+        //     $admin->password = fake()->password();
+        //     $admin->id_kecamatan = $i;
+        //     $admin->save();
+        // }
+
+        $admin = new Admin();
+        $admin->id_admin = 1;
+        $admin->username = 'admin@gmail.com';
+        $admin->password = '99999';
+        $admin->id_kecamatan = 2;
+        $admin->save();
     }
 }

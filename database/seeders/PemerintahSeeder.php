@@ -13,14 +13,21 @@ class PemerintahSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 4; $i++) {
-            $admin = new Pemerintah();
-            $admin->username_pemerintah = 'pemerintah_' . $i;
-            $admin->pw_pemerintah = fake()->password();
-            $admin->email_pemerintah = fake()->email();
-            $admin->telp_pemerintah = fake()->phoneNumber();
-            $admin->id_kecamatan = $i;
-            $admin->save();
-        }
+        // for($i = 1; $i < 4; $i++) {
+        //     $pemerintah = new Pemerintah();
+        //     $pemerintah->username_pemerintah = 'pemerintah_' . $i;
+        //     $pemerintah->pw_pemerintah = fake()->password();
+        //     $pemerintah->email_pemerintah = fake()->email();
+        //     $pemerintah->telp_pemerintah = fake()->phoneNumber();
+        //     $pemerintah->id_kecamatan = $i;
+        //     $pemerintah->save();
+        // }
+        $pemerintah = new Pemerintah();
+        $pemerintah->username_pemerintah = 'dinas_pertanian_001';
+        $pemerintah->pw_pemerintah = 'dinas123';
+        $pemerintah->email_pemerintah = 'dinas001@gmail.com';
+        $pemerintah->telp_pemerintah = fake()->phoneNumber();
+        $pemerintah->id_kecamatan = 2;
+        $pemerintah->save();
     }
 }

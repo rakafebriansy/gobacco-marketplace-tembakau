@@ -16,4 +16,20 @@ class AdminController extends Controller
             'title' => 'Admin | Login'
         ]);
     }
+    public function postLogin(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        if(Admin::query()->where('username',$validated['username'])->where('password',$validated['password'])->first()) {
+            $request->session()->regenerate();
+            return redirect('/admin/akun');
+        }
+        return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
+    }
+    public function akun()
+    {
+        return 'Hai';
+    }
 }

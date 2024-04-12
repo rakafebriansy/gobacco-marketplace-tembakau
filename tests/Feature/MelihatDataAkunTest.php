@@ -59,7 +59,7 @@ class MelihatDataAkunTest extends TestCase
         $petani = PetaniTembakau::first();
         $this->withSession(['id_petani' => $petani->id_petani])->get('/petani/akun')->assertSeeText('Petani | Profil')->assertSeeText('Username: retha');
     }
-    public function test_petaniFailed()
+    public function test_PetaniFailed()
     {
 
         $this->get('/petani/akun')->assertRedirect('petani/login');

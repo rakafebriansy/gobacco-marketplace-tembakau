@@ -45,7 +45,7 @@ class RegisterTest extends TestCase
             'email_petani' => 'petani@gmail.com',
             'id_jenis_kelamin' => 'laki-laki',
             'alamat_petani' => 'Jl. Mangga',
-            'id_kecamatan' => 'kecamatan_1',
+            'id_kecamatan' => 'patrang',
             'telp_petani' => '081266732213',
             'noktp_petani' => '3729792394',
         ])->assertRedirect('/petani/login');

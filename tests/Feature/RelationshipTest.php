@@ -9,6 +9,7 @@ use App\Models\JenisTembakau;
 use App\Models\Kecamatan;
 use App\Models\Pemerintah;
 use App\Models\PetaniTembakau;
+use App\Models\SertifikasiProduk;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\JenisKelaminSeeder;
 use Database\Seeders\JenisPengujianSeeder;
@@ -45,7 +46,7 @@ class RelationshipTest extends TestCase
         $this->seed(AdminSeeder::class);
 
         $admins = Admin::all();
-        self::assertCount(3, $admins);
+        self::assertCount(1, $admins);
         foreach ($admins as $admin) {
             // Log::channel('stderr')->info($admin);
             // Log::channel('stderr')->info($admin->kecamatan);
@@ -56,7 +57,7 @@ class RelationshipTest extends TestCase
         $this->seed([JenisKelaminSeeder::class, KecamatanSeeder::class, PetaniTembakauSeeder::class]);
         
         $petanis = PetaniTembakau::all();
-        self::assertCount(5, $petanis);
+        self::assertCount(1, $petanis);
         foreach ($petanis as $petani) {
             // Log::channel('stderr')->info($petani);
             // Log::channel('stderr')->info($petani->kecamatan);
@@ -67,7 +68,7 @@ class RelationshipTest extends TestCase
         $this->seed([KecamatanSeeder::class,PemerintahSeeder::class]);
 
         $pemerintahs = Pemerintah::all();
-        self::assertCount(3, $pemerintahs);
+        self::assertCount(1, $pemerintahs);
         foreach ($pemerintahs as $pemerintah) {
             // Log::channel('stderr')->info($pemerintah);
             // Log::channel('stderr')->info($pemerintah->kecamatan);
@@ -78,45 +79,19 @@ class RelationshipTest extends TestCase
         $this->seed([KecamatanSeeder::class,PemerintahSeeder::class,JenisPengujianSeeder::class]);
 
         $jenis_pengujians = JenisPengujian::all();
-        self::assertCount(5, $jenis_pengujians);
+        self::assertCount(2, $jenis_pengujians);
         foreach ($jenis_pengujians as $jenis_pengujian) {
             // Log::channel('stderr')->info($jenis_pengujian);
         }
     }
     public function testTembakauStatusSertifikasi()
     {
-        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class,PetaniTembakauSeeder::class,JenisPengujianSeeder::class,JenisTembakauSeeder::class,StatusUjiSeeder::class]);
+        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class,PetaniTembakauSeeder::class,JenisPengujianSeeder::class,JenisTembakauSeeder::class,StatusUjiSeeder::class,SertifikasiProdukSeeder::class]);
 
-        $jenis_tembakau = JenisTembakau::query()->first();
-        $jenis_tembakau->sertifikasiProduks()->attach(1,[
-            'id_sertifikasi' => 1,
-            'id_kecamatan' => 1,
-            'id_petani' => 4,
-            'id_pengujian' => 2,
-            'surat_izin_usaha' => fake()->word() . '.png',
-            'tgl_serahsampel' => fake()->date(),
-            'berkas_lain' => fake()->word() . '.png',
-            'bukti_tf' => fake()->word() . '.png',
-            'hasil_pengujian' => fake()->word() . '.png'
-            ]);
-        $jenis_tembakau->sertifikasiProduks()->attach(2,[
-            'id_sertifikasi' => 2,
-            'id_kecamatan' => 3,
-            'id_petani' => 2,
-            'id_pengujian' => 1,
-            'surat_izin_usaha' => fake()->word() . '.png',
-            'tgl_serahsampel' => fake()->date(),
-            'berkas_lain' => fake()->word() . '.png',
-            'bukti_tf' => fake()->word() . '.png',
-            'hasil_pengujian' => fake()->word() . '.png'
-            ]);
+        $jenis_tembakau = JenisTembakau::query()->where('id_jenis_tembakau',2)->first();
         self::assertNotNull($jenis_tembakau);
         
-        $status_ujis = $jenis_tembakau->sertifikasiProduks;
-        self::assertCount(2, $status_ujis);
-
-        foreach ($status_ujis as $status_uji) {
-            Log::channel('stderr')->info(json_encode($status_uji,JSON_PRETTY_PRINT));
-        }
+        $sertifikasi_produks = $jenis_tembakau->sertifikasiProduks;
+        self::assertCount(2, $sertifikasi_produks);
     }
 }

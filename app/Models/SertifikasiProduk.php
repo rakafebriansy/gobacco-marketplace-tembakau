@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class SertifikasiProduk extends Pivot
+class SertifikasiProduk extends Model
 {
     use HasFactory;
 
@@ -27,16 +26,12 @@ class SertifikasiProduk extends Pivot
         'bukti_tf',
         'hasil_pengujian'
     ];
-    public function usesTimestamps()
-    {
-        return false;
-    }
     public function jenisTembakau(): BelongsTo
     {
-        return $this->belongsTo(JenisTembakau::class, 'id_jenis_tembakau', 'id');
+        return $this->belongsTo(JenisTembakau::class, 'id_jenis_tembakau', 'id_jenis_tembakau');
     }
     public function statusUji(): BelongsTo
     {
-        return $this->belongsTo(StatusUji::class, 'id_status', 'id');
+        return $this->belongsTo(StatusUji::class, 'id_status', 'id_status');
     }
 }

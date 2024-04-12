@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JenisTembakau extends Model
 {
@@ -16,22 +17,8 @@ class JenisTembakau extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    public function sertifikasiProduks(): BelongsToMany
+    public function sertifikasiProduks(): HasMany
     {
-        return $this->belongsToMany(StatusUji::class,
-        'sertifikasi_produks',
-        'id_jenis_tembakau',
-        'id_status'
-        )->withPivot([
-            'id_sertifikasi',
-            'id_kecamatan',
-            'id_petani',
-            'id_pengujian',
-            'surat_izin_usaha',
-            'tgl_serahsampel',
-            'berkas_lain',
-            'bukti_tf',
-            'hasil_pengujian'
-            ])->using(SertifikasiProduk::class);
+        return $this->hasMany(SertifikasiProduk::class, 'id_jenis_tembakau', 'id_jenis_tembakau');
     }
 }

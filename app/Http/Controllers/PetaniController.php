@@ -116,7 +116,7 @@ class PetaniController extends Controller
     {
         $id_petani = $request->session()->get('id_petani',null);
         if(isset($id_petani)) {
-            $sertifikasis = SertifikasiProduk::query()->where('id_petani',$id_petani)->get();
+            $sertifikasis = SertifikasiProduk::query()->where('id_petani',1)->get();
             return view('petani.sertifikasi.table', [
                 'title' => 'Petani | Sertifikasi',
                 'sertifikasis' => $sertifikasis

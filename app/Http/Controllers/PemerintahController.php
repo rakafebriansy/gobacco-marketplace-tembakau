@@ -85,7 +85,7 @@ class PemerintahController extends Controller
             $id_kecamatan = Pemerintah::query()->find($id_pemerintah)->id_kecamatan;
             $sertifikasis = SertifikasiProduk::query()->where('id_kecamatan',$id_kecamatan)->get();
             return view('pemerintah.sertifikasi.table', [
-                'title' => 'Petani | Sertifikasi',
+                'title' => 'Pemerintah | Sertifikasi',
                 'sertifikasis' => $sertifikasis
             ]);
         } else {

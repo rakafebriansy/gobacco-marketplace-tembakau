@@ -19,22 +19,34 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/petani/register', [PetaniController::class,'register']);
-Route::post('/petani/register', [PetaniController::class,'postRegister']);
-Route::get('/petani/login', [PetaniController::class,'login']);
-Route::post('/petani/login', [PetaniController::class,'postLogin']);
-Route::get('/petani/akun',[PetaniController::class,'melihatDataAkun']);
-Route::get('/petani/akun/ubah',[PetaniController::class,'mengubahDataAkun']);
-Route::patch('/petani/akun/ubah',[PetaniController::class,'postMengubahDataAkun']);
 
-Route::get('/pemerintah/login', [PemerintahController::class,'login']);
-Route::post('/pemerintah/login', [PemerintahController::class,'postLogin']);
-Route::get('/pemerintah/akun',[PemerintahController::class,'melihatDataAkun']);
-Route::get('/pemerintah/akun/ubah',[PemerintahController::class,'mengubahDataAkun']);
-Route::patch('/pemerintah/akun/ubah',[PemerintahController::class,'postMengubahDataAkun']);
 
-Route::get('/admin/login', [AdminController::class,'login']);
-Route::post('/admin/login', [AdminController::class,'postLogin']);
-Route::get('/admin/akun',[AdminController::class,'melihatDataAkun']);
-Route::get('/admin/akun/ubah',[AdminController::class,'mengubahDataAkun']);
-Route::patch('/admin/akun/ubah',[AdminController::class,'postMengubahDataAkun']);
+Route::prefix('/petani')->group(function() {
+    Route::get('/register', [PetaniController::class,'register']);
+    Route::post('/register', [PetaniController::class,'postRegister']);
+    Route::get('/login', [PetaniController::class,'login']);
+    Route::post('/login', [PetaniController::class,'postLogin']);
+    Route::get('/akun',[PetaniController::class,'melihatDataAkun']);
+    Route::get('/akun/ubah',[PetaniController::class,'mengubahDataAkun']);
+    Route::patch('/akun/ubah',[PetaniController::class,'postMengubahDataAkun']);
+    Route::get('/sertifikasi',[PetaniController::class,'melihatPengajuanSertifikasi']);
+    Route::post('/sertifikasi',[PetaniController::class,'membuatPengajuanSertifikasi']);
+});
+
+Route::prefix('/pemerintah')->group(function(){
+    Route::get('/login', [PemerintahController::class,'login']);
+    Route::post('/login', [PemerintahController::class,'postLogin']);
+    Route::get('/akun',[PemerintahController::class,'melihatDataAkun']);
+    Route::get('/akun/ubah',[PemerintahController::class,'mengubahDataAkun']);
+    Route::patch('/akun/ubah',[PemerintahController::class,'postMengubahDataAkun']);
+    Route::get('/sertifikasi',[PemerintahController::class,'melihatPengajuanSertifikasi']);
+    Route::post('/sertifikasi',[PemerintahController::class,'membuatPengajuanSertifikasi']);
+});
+
+Route::prefix('/admin')->group(function(){
+    Route::get('/login', [AdminController::class,'login']);
+    Route::post('/login', [AdminController::class,'postLogin']);
+    Route::get('/akun',[AdminController::class,'melihatDataAkun']);
+    Route::get('/akun/ubah',[AdminController::class,'mengubahDataAkun']);
+    Route::patch('/akun/ubah',[AdminController::class,'postMengubahDataAkun']);
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kecamatan;
 use App\Models\Pemerintah;
+use App\Models\SertifikasiProduk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -38,13 +39,26 @@ class PemerintahController extends Controller
             $pemerintah = Pemerintah::find($id_pemerintah);
             return view('pemerintah.akun', [
                 'title' => 'Pemerintah | Profil',
-                'pemerintah' => $pemerintah //put id in hidden input on view
+                'pemerintah' => $pemerintah
             ]);
         } else {
             return redirect('pemerintah/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
     public function mengubahDataAkun(Request $request)
+    {
+        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        if(isset($id_pemerintah)) {
+            $pemerintah = Pemerintah::find($id_pemerintah);
+            return view('pemerintah.ubahAkun', [
+                'title' => 'Pemerintah | Ubah Profil',
+                'pemerintah' => $pemerintah //put id in hidden input on view
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMengubahDataAkun(Request $request)
     {
         var_dump('ld');
         $validated = $request->validate([
@@ -63,5 +77,19 @@ class PemerintahController extends Controller
             }
         }
         return redirect('/')->with('failed','Data akun gagal diperbarui!');
+    }
+    public function melihatPengajuanSertifikasi(Request $request)
+    {
+        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        if(isset($id_pemerintah)) {
+            $id_kecamatan = Pemerintah::query()->find($id_pemerintah)->id_kecamatan;
+            $sertifikasis = SertifikasiProduk::query()->where('id_kecamatan',$id_kecamatan)->get();
+            return view('pemerintah.sertifikasi.table', [
+                'title' => 'Petani | Sertifikasi',
+                'sertifikasis' => $sertifikasis
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
     }
 }

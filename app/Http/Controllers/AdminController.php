@@ -40,13 +40,26 @@ class AdminController extends Controller
             $admin = Admin::find($id_admin);
             return view('admin.akun', [
                 'title' => 'Admin | Profil',
-                'admin' => $admin //put id in hidden input on view
+                'admin' => $admin
             ]);
         } else {
             return redirect('admin/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
     public function mengubahDataAkun(Request $request)
+    {
+        $id_admin = $request->session()->get('id_admin',null);
+        if(isset($id_admin)) {
+            $admin = Admin::find($id_admin);
+            return view('admin.ubahAkun', [
+                'title' => 'Admin | Ubah Profil',
+                'admin' => $admin //put id in hidden input on view
+            ]);
+        } else {
+            return redirect('admin/login')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMengubahDataAkun(Request $request)
     {
         $validated = $request->validate([
             'username' => 'required',

@@ -24,14 +24,17 @@ Route::post('/petani/register', [PetaniController::class,'postRegister']);
 Route::get('/petani/login', [PetaniController::class,'login']);
 Route::post('/petani/login', [PetaniController::class,'postLogin']);
 Route::get('/petani/akun',[PetaniController::class,'melihatDataAkun']);
-Route::patch('/petani/akun',[PetaniController::class,'mengubahDataAkun']);
+Route::get('/petani/akun/ubah',[PetaniController::class,'mengubahDataAkun']);
+Route::patch('/petani/akun/ubah',[PetaniController::class,'postMengubahDataAkun']);
 
 Route::get('/pemerintah/login', [PemerintahController::class,'login']);
 Route::post('/pemerintah/login', [PemerintahController::class,'postLogin']);
 Route::get('/pemerintah/akun',[PemerintahController::class,'melihatDataAkun']);
-Route::patch('/pemerintah/akun',[PemerintahController::class,'mengubahDataAkun']);
+Route::get('/pemerintah/akun/ubah',[PemerintahController::class,'mengubahDataAkun']);
+Route::patch('/pemerintah/akun/ubah',[PemerintahController::class,'postMengubahDataAkun']);
 
 Route::get('/admin/login', [AdminController::class,'login']);
 Route::post('/admin/login', [AdminController::class,'postLogin']);
 Route::get('/admin/akun',[AdminController::class,'melihatDataAkun']);
-Route::patch('/admin/akun',[AdminController::class,'mengubahDataAkun']);
+Route::get('/admin/akun/ubah',[AdminController::class,'mengubahDataAkun']);
+Route::patch('/admin/akun/ubah',[AdminController::class,'postMengubahDataAkun']);

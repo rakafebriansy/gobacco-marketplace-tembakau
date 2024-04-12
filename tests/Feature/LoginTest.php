@@ -23,18 +23,18 @@ class LoginTest extends TestCase
         DB::delete('DELETE FROM jenis_kelamins');
         DB::delete('DELETE FROM kecamatans');
     }
-    public function testLoginPetani()
+    public function test_Petani()
     {
         $this->get('/petani/login')->assertSeeText('Petani | Login')->assertSeeText('Hello Petani');
     }
-    public function testLoginPetaniFailed()
+    public function test_PetaniFailed()
     {
         $this->post('/petani/login',[
             'email_petani' => 'rasa@gmail.com',
             'pw_petani' => '12345'
         ])->assertRedirect('/');
     }
-    public function testLoginPetaniSuccess()
+    public function test_PetaniSuccess()
     {
         $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class, PetaniTembakauSeeder::class]);
 
@@ -44,18 +44,18 @@ class LoginTest extends TestCase
         ])->assertRedirect('/petani/akun');
     }
 
-    public function testLoginPemerintahView()
+    public function test_PemerintahView()
     {
         $this->get('/pemerintah/login')->assertSeeText('Pemerintah | Login')->assertSeeText('Hello Pemerintah');
     }
-    public function testLoginPemerintahFailed()
+    public function test_PemerintahFailed()
     {
         $this->post('/pemerintah/login',[
             'email_pemerintah' => 'rasa@gmail.com',
             'pw_pemerintah' => '12345'
         ])->assertRedirect('/');
     }
-    public function testLoginPemerintahSuccess()
+    public function test_PemerintahSuccess()
     {
         $this->seed([KecamatanSeeder::class, PemerintahSeeder::class]);
 
@@ -64,19 +64,19 @@ class LoginTest extends TestCase
             'pw_pemerintah' => 'dinas123'
         ])->assertRedirect('/pemerintah/akun');
     }
-    public function testLoginAdminView()
+    public function test_AdminView()
     {
 
         $this->get('/admin/login')->assertSeeText('Admin | Login')->assertSeeText('Hello Admin');
     }
-    public function testLoginAdminFailed()
+    public function test_AdminFailed()
     {
         $this->post('/admin/login',[
             'username' => 'rasa@gmail.com',
             'password' => '12345'
         ])->assertRedirect('/');
     }
-    public function testLoginAdminSuccess()
+    public function test_AdminSuccess()
     {
         $this->seed([KecamatanSeeder::class, AdminSeeder::class]);
         $this->post('/admin/login',[

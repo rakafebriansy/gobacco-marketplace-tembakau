@@ -13,13 +13,18 @@ class JenisPengujianSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 6; $i++) {
-            $jenis_pengujian = new JenisPengujian();
-            $jenis_pengujian->id_pengujian = $i;
-            $jenis_pengujian->jenis_pengujian = fake()->sentence();
-            $jenis_pengujian->harga_uji = fake()->numberBetween(100000,10000000);
-            $jenis_pengujian->id_pemerintah = fake()->numberBetween(1,3);
-            $jenis_pengujian->save();
-        }
+        $jenis_pengujian = new JenisPengujian();
+        $jenis_pengujian->id_pengujian = 1;
+        $jenis_pengujian->jenis_pengujian = 'Nikotin Metode AA3';
+        $jenis_pengujian->harga_uji = 400000;
+        $jenis_pengujian->id_pemerintah = 1;
+        $jenis_pengujian->save();
+
+        $jenis_pengujian = new JenisPengujian();
+        $jenis_pengujian->id_pengujian = 2;
+        $jenis_pengujian->jenis_pengujian = 'Air Metode Oven';
+        $jenis_pengujian->harga_uji = 150000;
+        $jenis_pengujian->id_pemerintah = 1;
+        $jenis_pengujian->save();
     }
 }

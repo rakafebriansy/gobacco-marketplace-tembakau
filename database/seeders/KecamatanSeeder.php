@@ -13,11 +13,24 @@ class KecamatanSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 4; $i++) {
-            $kecamatan = new Kecamatan();
-            $kecamatan->id_kecamatan = $i;
-            $kecamatan->kecamatan = 'kecamatan_' . $i;
-            $kecamatan->save();
-        }
+        $kecamatan = new Kecamatan();
+        $kecamatan->id_kecamatan = 1;
+        $kecamatan->kecamatan = 'Patrang';
+        $kecamatan->save();
+
+        $kecamatan = new Kecamatan();
+        $kecamatan->id_kecamatan = 2;
+        $kecamatan->kecamatan = 'Kaliwates';
+        $kecamatan->save();
+
+        $kecamatan = new Kecamatan();
+        $kecamatan->id_kecamatan = 3;
+        $kecamatan->kecamatan = 'Arjasa';
+        $kecamatan->save();
+
+        $kecamatan = new Kecamatan();
+        $kecamatan->id_kecamatan = 4;
+        $kecamatan->kecamatan = 'Sumbersari';
+        $kecamatan->save();
     }
 }

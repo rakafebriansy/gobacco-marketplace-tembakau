@@ -28,38 +28,38 @@ class MelihatDataAkunTest extends TestCase
         DB::delete('DELETE FROM kecamatans');
         Session::flush();
     }
-    public function testMelihatDataAkun_AdminSuccess()
+    public function test_AdminSuccess()
     {
         $this->seed([KecamatanSeeder::class,AdminSeeder::class]);
         
         $admin = Admin::first();
-        $this->withSession(['id_admin' => $admin->id_admin])->get('/admin/akun')->assertSeeText('Admin | Profil')->assertSeeText('admin@gmail.com');
+        $this->withSession(['id_admin' => $admin->id_admin])->get('/admin/akun')->assertSeeText('Admin | Profil')->assertSeeText('Username: admin@gmail.com');
     }
-    public function testMelihatDataAkun_AdminFailed()
+    public function test_AdminFailed()
     {
 
         $this->get('/admin/akun')->assertRedirect('admin/login');
     }
-    public function testMelihatDataAkun_PemerintahSuccess()
+    public function test_PemerintahSuccess()
     {
         $this->seed([KecamatanSeeder::class,PemerintahSeeder::class]);
         
         $pemerintah = Pemerintah::first();
-        $this->withSession(['id_pemerintah' => $pemerintah->id_pemerintah])->get('/pemerintah/akun')->assertSeeText('Pemerintah | Profil')->assertSeeText('dinas_pertanian_001');
+        $this->withSession(['id_pemerintah' => $pemerintah->id_pemerintah])->get('/pemerintah/akun')->assertSeeText('Pemerintah | Profil')->assertSeeText('Username: dinas_pertanian_001');
     }
-    public function testMelihatDataAkun_PemerintahFailed()
+    public function test_PemerintahFailed()
     {
 
         $this->get('/pemerintah/akun')->assertRedirect('pemerintah/login');
     }
-    public function testMelihatDataAkun_PetaniSuccess()
+    public function test_PetaniSuccess()
     {
         $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class,PetaniTembakauSeeder::class]);
         
         $petani = PetaniTembakau::first();
-        $this->withSession(['id_petani' => $petani->id_petani])->get('/petani/akun')->assertSeeText('Petani | Profil')->assertSeeText('retha');
+        $this->withSession(['id_petani' => $petani->id_petani])->get('/petani/akun')->assertSeeText('Petani | Profil')->assertSeeText('Username: retha');
     }
-    public function testMelihatDataAkun_petaniFailed()
+    public function test_petaniFailed()
     {
 
         $this->get('/petani/akun')->assertRedirect('petani/login');

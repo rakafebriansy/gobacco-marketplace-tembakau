@@ -13,11 +13,19 @@ class StatusUjiSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 4; $i++) {
-            $status_uji = new StatusUji();
-            $status_uji->id_status = $i;
-            $status_uji->status_uji = fake()->word();
-            $status_uji->save();
-        }
+        $status_uji = new StatusUji();
+        $status_uji->id_status = 1;
+        $status_uji->status_uji = 'Konfirmasi';
+        $status_uji->save();
+        
+        $status_uji = new StatusUji();
+        $status_uji->id_status = 2;
+        $status_uji->status_uji = 'Tolak';
+        $status_uji->save();
+
+        $status_uji = new StatusUji();
+        $status_uji->id_status = 3;
+        $status_uji->status_uji = 'Proses';
+        $status_uji->save();
     }
 }

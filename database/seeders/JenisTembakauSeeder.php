@@ -13,12 +13,22 @@ class JenisTembakauSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 6; $i++) {
-            $jenis_tembakau = new JenisTembakau();
-            $jenis_tembakau->id_jenis_tembakau = $i;
-            $jenis_tembakau->jenis_tembakau = fake()->word();
-            $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
-            $jenis_tembakau->save();
-        }
+        $jenis_tembakau = new JenisTembakau();
+        $jenis_tembakau->id_jenis_tembakau = 1;
+        $jenis_tembakau->jenis_tembakau = 'Voor Oogst (VO)';
+        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->save();
+
+        $jenis_tembakau = new JenisTembakau();
+        $jenis_tembakau->id_jenis_tembakau = 2;
+        $jenis_tembakau->jenis_tembakau = 'No Oogst (NO)';
+        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->save();
+        
+        $jenis_tembakau = new JenisTembakau();
+        $jenis_tembakau->id_jenis_tembakau = 3;
+        $jenis_tembakau->jenis_tembakau = 'Virginia';
+        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->save();
     }
 }

@@ -15,7 +15,18 @@ class SertifikasiProduk extends Pivot
     protected $foreignKey = 'id_jenis_tembakau';
     protected $relatedKey = 'id_status';
     public $timestamps = false;
-    
+    protected $fillable = [
+        'id_kecamatan',
+        'id_petani',
+        'id_pengujian',
+        'id_jenis_tembakau',
+        'id_status',
+        'surat_izin_usaha',
+        'tgl_serahsampel',
+        'berkas_lain',
+        'bukti_tf',
+        'hasil_pengujian'
+    ];
     public function usesTimestamps()
     {
         return false;

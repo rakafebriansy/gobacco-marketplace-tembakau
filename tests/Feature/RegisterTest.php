@@ -17,11 +17,11 @@ class RegisterTest extends TestCase
         DB::delete('DELETE FROM jenis_kelamins');
         DB::delete('DELETE FROM kecamatans');
     }
-    public function testRegisterView()
+    public function testView()
     {
         $this->get('/petani/register')->assertSeeText('Petani | Register')->assertSeeText('Hello Guest');
     }
-    public function testPostRegisterFailed()
+    public function test_Failed()
     {
         $this->post('/petani/register',[
             'nama_petani' => '',
@@ -35,7 +35,7 @@ class RegisterTest extends TestCase
             'noktp_petani' => '',
         ])->assertRedirect('/');
     }
-    public function testPostRegisterSuccess()
+    public function test_Success()
     {
         $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class]);
         $this->post('/petani/register',[

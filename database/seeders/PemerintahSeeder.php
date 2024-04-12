@@ -23,6 +23,7 @@ class PemerintahSeeder extends Seeder
         //     $pemerintah->save();
         // }
         $pemerintah = new Pemerintah();
+        $pemerintah->id_pemerintah = 1;
         $pemerintah->username_pemerintah = 'dinas_pertanian_001';
         $pemerintah->pw_pemerintah = 'dinas123';
         $pemerintah->email_pemerintah = 'dinas001@gmail.com';

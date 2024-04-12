@@ -6,11 +6,14 @@ use App\Models\Kecamatan;
 use App\Models\Pemerintah;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PemerintahController extends Controller
 {
     public function login()
     {
+        $id = Session::get('id_pemerintah');
+        if(isset($id)) return redirect('/pemerintah/akun');
         return view('pemerintah.login', [
             'title' => 'Pemerintah | Login'
         ]);
@@ -24,7 +27,7 @@ class PemerintahController extends Controller
         $pemerintah = Pemerintah::query()->where('email_pemerintah',$validated['email_pemerintah'])->where('pw_pemerintah',$validated['pw_pemerintah'])->first();
         if($pemerintah) {
             $request->session()->put('id_pemerintah',$pemerintah->id_pemerintah);
-            return redirect('/pemerintah/profil');
+            return redirect('/pemerintah/akun');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
     }
@@ -33,16 +36,32 @@ class PemerintahController extends Controller
         $id_pemerintah = $request->session()->get('id_pemerintah',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
-            return view('pemerintah.profil', [
+            return view('pemerintah.akun', [
                 'title' => 'Pemerintah | Profil',
-                'pemerintah' => $pemerintah
+                'pemerintah' => $pemerintah //put id in hidden input on view
             ]);
         } else {
             return redirect('pemerintah/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
-    public function akun()
+    public function mengubahDataAkun(Request $request)
     {
-        return 'Hai';
+        var_dump('ld');
+        $validated = $request->validate([
+            'username_pemerintah' => 'required',
+            'pw_pemerintah' => 'required'
+        ]);
+        $id_pemerintah = $request->session()->get('id_pemerintah', null);
+        var_dump($id_pemerintah);
+        if(isset($id_pemerintah)) {
+            $row_affected = Pemerintah::query()->where('id_pemerintah',$id_pemerintah)->update([
+                'username_pemerintah' => $validated['username_pemerintah'],
+                'pw_pemerintah' => $validated['pw_pemerintah']
+            ]);
+            if($row_affected) {
+                return redirect('/pemerintah/akun')->with('success','Data akun berhasil diperbarui!');
+            }
+        }
+        return redirect('/')->with('failed','Data akun gagal diperbarui!');
     }
 }

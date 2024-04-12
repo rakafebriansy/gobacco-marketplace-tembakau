@@ -8,12 +8,15 @@ use App\Models\PetaniTembakau;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class PetaniController extends Controller
 {
     public function register()
     {
+        $id = Session::get('id_petani');
+        if(isset($id)) return redirect('/petani/akun');
         return view('petani.login1', [
             'title' => 'Petani | Register'
         ]);
@@ -45,6 +48,8 @@ class PetaniController extends Controller
     }
     public function login()
     {
+        $id = Session::get('id_petani');
+        if(isset($id)) return redirect('/petani/akun');
         return view('petani.login', [
             'title' => 'Petani | Login'
         ]);
@@ -58,7 +63,7 @@ class PetaniController extends Controller
         $petani_tembakau = PetaniTembakau::query()->where('email_petani',$validated['email_petani'])->where('pw_petani',$validated['pw_petani'])->first();
         if($petani_tembakau) {
             $request->session()->put('id_petani',$petani_tembakau->id_petani);
-            return redirect('/petani/profil');
+            return redirect('/petani/akun');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
     }
@@ -67,16 +72,30 @@ class PetaniController extends Controller
         $id_petani = $request->session()->get('id_petani',null);
         if(isset($id_petani)) {
             $petani = PetaniTembakau::find($id_petani);
-            return view('petani.profil', [
+            return view('petani.akun', [
                 'title' => 'Petani | Profil',
-                'petani' => $petani
+                'petani' => $petani //put id in hidden input on view
             ]);
         } else {
             return redirect('petani/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
-    public function akun()
+    public function mengubahDataAkun(Request $request)
     {
-        return 'Hai';
+        $validated = $request->validate([
+            'username_petani' => 'required',
+            'pw_petani' => 'required'
+        ]);
+        $id_petani = $request->session()->get('id_petani', null);
+        if(isset($id_petani)) {
+            $row_affected = PetaniTembakau::query()->where('id_petani',$id_petani)->update([
+                'username_petani' => $validated['username_petani'],
+                'pw_petani' => $validated['pw_petani']
+            ]);
+            if($row_affected) {
+                return redirect('/petani/akun')->with('success','Data akun berhasil diperbarui!');
+            }
+        }
+        return redirect('/')->with('failed','Data akun gagal diperbarui!');
     }
 }

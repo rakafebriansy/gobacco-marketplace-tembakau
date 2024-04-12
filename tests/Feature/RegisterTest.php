@@ -17,14 +17,12 @@ class RegisterTest extends TestCase
         DB::delete('DELETE FROM jenis_kelamins');
         DB::delete('DELETE FROM kecamatans');
     }
-    public function testPetani()
+    public function testRegisterView()
     {
-        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class, PetaniTembakauSeeder::class]);
-
-        //view
         $this->get('/petani/register')->assertSeeText('Petani | Register')->assertSeeText('Hello Guest');
-
-        //post failed
+    }
+    public function testPostRegisterFailed()
+    {
         $this->post('/petani/register',[
             'nama_petani' => '',
             'username_petani' => '',
@@ -35,9 +33,11 @@ class RegisterTest extends TestCase
             'id_kecamatan' => '',
             'telp_petani' => '',
             'noktp_petani' => '',
-        ])->assertRedirect('/petani/register');
-
-        //post success
+        ])->assertRedirect('/');
+    }
+    public function testPostRegisterSuccess()
+    {
+        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class]);
         $this->post('/petani/register',[
             'nama_petani' => 'Muhammad Rindaman',
             'username_petani' => 'Rindaman',
@@ -49,5 +49,9 @@ class RegisterTest extends TestCase
             'telp_petani' => '081266732213',
             'noktp_petani' => '3729792394',
         ])->assertRedirect('/petani/login');
+    }
+    public function testAlreadyRegister()
+    {
+        $this->withSession(['id_petani' => 1])->get('/petani/register')->assertRedirect('/petani/akun');
     }
 }

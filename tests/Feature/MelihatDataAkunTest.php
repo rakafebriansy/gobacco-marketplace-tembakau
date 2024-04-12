@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
-class ProfilTest extends TestCase
+class MelihatDataAkunTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -28,40 +28,40 @@ class ProfilTest extends TestCase
         DB::delete('DELETE FROM kecamatans');
         Session::flush();
     }
-    public function testProfilAdminSuccess()
+    public function testMelihatDataAkun_AdminSuccess()
     {
         $this->seed([KecamatanSeeder::class,AdminSeeder::class]);
         
         $admin = Admin::first();
-        $this->withSession(['id_admin' => $admin->id_admin])->get('/admin/profil')->assertSeeText('Admin | Profil')->assertSeeText('admin@gmail.com');
+        $this->withSession(['id_admin' => $admin->id_admin])->get('/admin/akun')->assertSeeText('Admin | Profil')->assertSeeText('admin@gmail.com');
     }
-    public function testProfilAdminFailed()
+    public function testMelihatDataAkun_AdminFailed()
     {
 
-        $this->get('/admin/profil')->assertRedirect('admin/login');
+        $this->get('/admin/akun')->assertRedirect('admin/login');
     }
-    public function testProfilPemerintahSuccess()
+    public function testMelihatDataAkun_PemerintahSuccess()
     {
         $this->seed([KecamatanSeeder::class,PemerintahSeeder::class]);
         
         $pemerintah = Pemerintah::first();
-        $this->withSession(['id_pemerintah' => $pemerintah->id_pemerintah])->get('/pemerintah/profil')->assertSeeText('Pemerintah | Profil')->assertSeeText('dinas_pertanian_001');
+        $this->withSession(['id_pemerintah' => $pemerintah->id_pemerintah])->get('/pemerintah/akun')->assertSeeText('Pemerintah | Profil')->assertSeeText('dinas_pertanian_001');
     }
-    public function testProfilPemerintahFailed()
+    public function testMelihatDataAkun_PemerintahFailed()
     {
 
-        $this->get('/pemerintah/profil')->assertRedirect('pemerintah/login');
+        $this->get('/pemerintah/akun')->assertRedirect('pemerintah/login');
     }
-    public function testProfilPetaniSuccess()
+    public function testMelihatDataAkun_PetaniSuccess()
     {
         $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class,PetaniTembakauSeeder::class]);
         
         $petani = PetaniTembakau::first();
-        $this->withSession(['id_petani' => $petani->id_petani])->get('/petani/profil')->assertSeeText('Petani | Profil')->assertSeeText('retha');
+        $this->withSession(['id_petani' => $petani->id_petani])->get('/petani/akun')->assertSeeText('Petani | Profil')->assertSeeText('retha');
     }
-    public function testProfilpetaniFailed()
+    public function testMelihatDataAkun_petaniFailed()
     {
 
-        $this->get('/petani/profil')->assertRedirect('petani/login');
+        $this->get('/petani/akun')->assertRedirect('petani/login');
     }
 }

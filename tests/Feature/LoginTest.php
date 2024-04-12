@@ -41,8 +41,9 @@ class LoginTest extends TestCase
         $this->post('/petani/login',[
             'email_petani' => 'retha@gmail.com',
             'pw_petani' => '12345'
-        ])->assertRedirect('/petani/profil');
+        ])->assertRedirect('/petani/akun');
     }
+
     public function testLoginPemerintahView()
     {
         $this->get('/pemerintah/login')->assertSeeText('Pemerintah | Login')->assertSeeText('Hello Pemerintah');
@@ -61,7 +62,7 @@ class LoginTest extends TestCase
         $this->post('/pemerintah/login',[
             'email_pemerintah' => 'dinas001@gmail.com',
             'pw_pemerintah' => 'dinas123'
-        ])->assertRedirect('/pemerintah/profil');
+        ])->assertRedirect('/pemerintah/akun');
     }
     public function testLoginAdminView()
     {
@@ -81,6 +82,18 @@ class LoginTest extends TestCase
         $this->post('/admin/login',[
             'username' => 'admin@gmail.com',
             'password' => '99999'
-        ])->assertRedirect('/admin/profil');
+        ])->assertRedirect('/admin/akun');
+    }
+    public function testAlreadyLoginPetani()
+    {
+        $this->withSession(['id_petani' => 1])->get('/petani/login')->assertRedirect('/petani/akun');
+    }
+    public function testAlreadyLoginPemerintah()
+    {
+        $this->withSession(['id_pemerintah' => 1])->get('/pemerintah/login')->assertRedirect('/pemerintah/akun');
+    }
+    public function testAlreadyLoginAdmin()
+    {
+        $this->withSession(['id_admin' => 1])->get('/admin/login')->assertRedirect('/admin/akun');
     }
 }

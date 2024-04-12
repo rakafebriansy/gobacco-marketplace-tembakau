@@ -17,6 +17,8 @@ module.exports = {
           putih : '#EFF6E9',
           hitam : '#19191B',
           modal : '#EFF6E9',
+          tidak : '#ED0000',
+          iya : '#3AB81B',
         }
       },
       fontFamily :{

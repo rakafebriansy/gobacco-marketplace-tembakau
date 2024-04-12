@@ -25,56 +25,59 @@ class LoginTest extends TestCase
     }
     public function testLoginPetani()
     {
-        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class, PetaniTembakauSeeder::class]);
-
-        //view
         $this->get('/petani/login')->assertSeeText('Petani | Login')->assertSeeText('Hello Petani');
-
-        //post failed
+    }
+    public function testLoginPetaniFailed()
+    {
         $this->post('/petani/login',[
             'email_petani' => 'rasa@gmail.com',
             'pw_petani' => '12345'
-        ])->assertRedirect('/petani/login');
+        ])->assertRedirect('/');
+    }
+    public function testLoginPetaniSuccess()
+    {
+        $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class, PetaniTembakauSeeder::class]);
 
-        //post success
         $this->post('/petani/login',[
             'email_petani' => 'retha@gmail.com',
             'pw_petani' => '12345'
         ])->assertRedirect('/petani/akun');
     }
-    public function testLoginPemerintah()
+    public function testLoginPemerintahView()
     {
-        $this->seed([KecamatanSeeder::class, PemerintahSeeder::class]);
-
-        //view
         $this->get('/pemerintah/login')->assertSeeText('Pemerintah | Login')->assertSeeText('Hello Pemerintah');
-
-        //post failed
+    }
+    public function testLoginPemerintahFailed()
+    {
         $this->post('/pemerintah/login',[
             'email_pemerintah' => 'rasa@gmail.com',
             'pw_pemerintah' => '12345'
-        ])->assertRedirect('/pemerintah/login');
+        ])->assertRedirect('/');
+    }
+    public function testLoginPemerintahSuccess()
+    {
+        $this->seed([KecamatanSeeder::class, PemerintahSeeder::class]);
 
-        //post success
         $this->post('/pemerintah/login',[
             'email_pemerintah' => 'dinas001@gmail.com',
             'pw_pemerintah' => 'dinas123'
         ])->assertRedirect('/pemerintah/akun');
     }
-    public function testLoginAdmin()
+    public function testLoginAdminView()
     {
-        $this->seed([KecamatanSeeder::class, AdminSeeder::class]);
 
-        //view
         $this->get('/admin/login')->assertSeeText('Admin | Login')->assertSeeText('Hello Admin');
-
-        //post failed
+    }
+    public function testLoginAdminFailed()
+    {
         $this->post('/admin/login',[
             'username' => 'rasa@gmail.com',
             'password' => '12345'
-        ])->assertRedirect('/admin/login');
-
-        //post success
+        ])->assertRedirect('/');
+    }
+    public function testLoginAdminSuccess()
+    {
+        $this->seed([KecamatanSeeder::class, AdminSeeder::class]);
         $this->post('/admin/login',[
             'username' => 'admin@gmail.com',
             'password' => '99999'

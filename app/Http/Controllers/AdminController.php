@@ -7,6 +7,7 @@ use App\Models\Kecamatan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -22,11 +23,26 @@ class AdminController extends Controller
             'username' => 'required',
             'password' => 'required'
         ]);
-        if(Admin::query()->where('username',$validated['username'])->where('password',$validated['password'])->first()) {
+        $admin = Admin::query()->where('username',$validated['username'])->where('password',$validated['password'])->first();
+        if($admin) {
             $request->session()->regenerate();
+            $request->session()->put('id_admin',$admin->id_admin);
             return redirect('/admin/akun');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
+    }
+    public function profil(Request $request)
+    {
+        $id_admin = $request->session()->get('id_admin',null);
+        if(isset($id_admin)) {
+            $admin = Admin::find($id_admin);
+            return view('admin.profil', [
+                'title' => 'Admin | Profil',
+                'admin' => $admin
+            ]);
+        } else {
+            return redirect('admin/login')->with('failed','Silahkan login terlebih dahulu!');
+        }
     }
     public function akun()
     {

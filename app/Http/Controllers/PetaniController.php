@@ -55,11 +55,25 @@ class PetaniController extends Controller
             'email_petani' => 'required',
             'pw_petani' => 'required'
         ]);
-        if(PetaniTembakau::query()->where('email_petani',$validated['email_petani'])->where('pw_petani',$validated['pw_petani'])->first()) {
-            $request->session()->regenerate();
+        $petani_tembakau = PetaniTembakau::query()->where('email_petani',$validated['email_petani'])->where('pw_petani',$validated['pw_petani'])->first();
+        if($petani_tembakau) {
+            $request->session()->put('id_petani',$petani_tembakau->id_petani);
             return redirect('/petani/akun');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
+    }
+    public function profil(Request $request)
+    {
+        $id_petani = $request->session()->get('id_petani',null);
+        if(isset($id_petani)) {
+            $petani = PetaniTembakau::find($id_petani);
+            return view('petani.profil', [
+                'title' => 'Petani | Profil',
+                'petani' => $petani
+            ]);
+        } else {
+            return redirect('petani/login')->with('failed','Silahkan login terlebih dahulu!');
+        }
     }
     public function akun()
     {

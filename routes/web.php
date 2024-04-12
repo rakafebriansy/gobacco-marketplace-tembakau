@@ -23,12 +23,15 @@ Route::get('/petani/register', [PetaniController::class,'register']);
 Route::post('/petani/register', [PetaniController::class,'postRegister']);
 Route::get('/petani/login', [PetaniController::class,'login']);
 Route::post('/petani/login', [PetaniController::class,'postLogin']);
+Route::get('/petani/profil',[PetaniController::class,'profil']);
 Route::get('/petani/akun',[PetaniController::class,'akun']);
 
 Route::get('/pemerintah/login', [PemerintahController::class,'login']);
 Route::post('/pemerintah/login', [PemerintahController::class,'postLogin']);
+Route::get('/pemerintah/profil',[PemerintahController::class,'profil']);
 Route::get('/pemerintah/akun',[PemerintahController::class,'akun']);
 
 Route::get('/admin/login', [AdminController::class,'login']);
 Route::post('/admin/login', [AdminController::class,'postLogin']);
+Route::get('/admin/profil',[AdminController::class,'profil']);
 Route::get('/admin/akun',[AdminController::class,'akun']);

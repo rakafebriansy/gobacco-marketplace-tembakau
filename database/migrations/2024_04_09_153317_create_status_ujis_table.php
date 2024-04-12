@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('status_ujis', function (Blueprint $table) {
             $table->bigIncrements('id_status')->nullable(false);
-            $table->string('status_uji',100)->nullable(false);
+            $table->enum('status_uji',['Konfirmasi','Tolak','Proses'])->nullable(false);
         });
     }
 

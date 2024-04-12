@@ -17,9 +17,13 @@ class LoginTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        DB::delete('DELETE FROM admins');
+        DB::delete('DELETE FROM sertifikasi_produks');
+        DB::delete('DELETE FROM jenis_tembakaus');
+        DB::delete('DELETE FROM jenis_pengujians');
+        DB::delete('DELETE FROM status_ujis');
         DB::delete('DELETE FROM pemerintahs');
         DB::delete('DELETE FROM petani_tembakaus');
+        DB::delete('DELETE FROM admins');
         DB::delete('DELETE FROM jenis_kelamins');
         DB::delete('DELETE FROM kecamatans');
     }

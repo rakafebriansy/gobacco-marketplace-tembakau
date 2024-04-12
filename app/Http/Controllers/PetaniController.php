@@ -6,6 +6,7 @@ use App\Models\JenisKelamin;
 use App\Models\Kecamatan;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class PetaniController extends Controller
     {
         $id = Session::get('id_petani');
         if(isset($id)) return redirect('/petani/akun');
-        return view('petani.login1', [
+        return view('petani.register', [
             'title' => 'Petani | Register'
         ]);
     }
@@ -28,7 +29,7 @@ class PetaniController extends Controller
             'nama_petani' => 'required',
             'username_petani' => 'required|unique:petani_tembakaus,username_petani',
             'pw_petani' => 'required',
-            'email_petani' => 'required',
+            'email_petani' => 'required|email',
             'id_jenis_kelamin' => 'required',
             'alamat_petani' => 'required',
             'id_kecamatan' => 'required',
@@ -42,9 +43,9 @@ class PetaniController extends Controller
             $validated['id_kecamatan'] = $kecamatan->id_kecamatan;
             $validated['id_jenis_kelamin'] = $jenis_kelamin->id_jenis_kelamin;
             PetaniTembakau::create($validated);
-            return redirect('/petani/login')->with('success', 'Data akun berhasil dibuat!');
-        } catch (ValidationException $e) {
-            return back()->with('failed',$e->errors());
+            return redirect('/petani/register')->with('success', 'Data akun berhasil dibuat!');
+        } catch (QueryException $e) {
+            return back()->with('failed','Data akun gagal dibuat!');
         }
     }
     public function login()

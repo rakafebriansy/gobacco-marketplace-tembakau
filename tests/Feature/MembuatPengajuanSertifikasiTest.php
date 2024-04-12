@@ -92,20 +92,27 @@ class MembuatPengajuanSertifikasiTest extends TestCase
     }
     public function testView_PemerintahFailed()
     {
-        $this->get('/pemerintah/sertifikasi/buat')->assertRedirect('/');
+        $this->get('/pemerintah/sertifikasi/buat/1386')->assertRedirect('/');
     }
-    // public function testPost_pemerintahSuccess()
-    // {
-    //     $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class,pemerintahTembakauSeeder::class]);
-        
-    //     $pemerintah = pemerintahTembakau::first();
-    //     $this->withSession(['id_pemerintah' => $pemerintah->id_pemerintah])->patch('/pemerintah/sertifikasi/buat', [
-    //         'username_pemerintah' => 'raka@gmail.com',
-    //         'pw_pemerintah' => '12224'
-    //     ])->assertRedirect('/pemerintah/akun');
-    // }
-    // public function testPost_pemerintahFailed()
-    // {
-    //     $this->patch('/pemerintah/akun/ubah')->assertRedirect('/');
-    // }
+    public function testPost_pemerintahSuccess()
+    {
+        $this->seed([
+            JenisKelaminSeeder::class,
+            KecamatanSeeder::class,
+            PemerintahSeeder::class,
+            PetaniTembakauSeeder::class,
+            StatusUjiSeeder::class,
+            JenisTembakauSeeder::class,
+            JenisPengujianSeeder::class,
+            SertifikasiProdukSeeder::class,
+        ]);
+        $this->post('/pemerintah/sertifikasi/buat', [
+            'status' => '1',
+            'id_sertifikasi' => '1'
+        ])->assertRedirect('/pemerintah/sertifikasi/buat/1');
+    }
+    public function testPost_pemerintahFailed()
+    {
+        $this->post('/pemerintah/sertifikasi/buat')->assertRedirect('/pemerintah/sertifikasi/buat');
+    }
 }

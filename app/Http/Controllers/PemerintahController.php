@@ -6,6 +6,7 @@ use App\Models\Kecamatan;
 use App\Models\Pemerintah;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -95,14 +96,26 @@ class PemerintahController extends Controller
     }
     public function membuatPengajuanSertifikasi($id_sertifikasi)
     {
-        if(isset($id_sertifikasi)) {
-            $sertifikasi = SertifikasiProduk::find($id_sertifikasi);
+        $sertifikasi = SertifikasiProduk::find($id_sertifikasi);
+        var_dump($sertifikasi);
+        if(isset($sertifikasi)) {
             return view('pemerintah.sertifikasi.form', [
                 'title' => 'Pemerintah | Pengajuan Sertifikasi',
                 'sertifikasi' => $sertifikasi
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMembuatPengajuanSertifikasi(Request $request)
+    {
+        $status_fix = $request->input('status');
+        $id_sertifikasi = $request->input('id_sertifikasi');
+        try {
+            SertifikasiProduk::query()->where('id_sertifikasi',$id_sertifikasi)->update(['id_status' => intval($status_fix)]);
+            return redirect('/pemerintah/sertifikasi/buat/' . $id_sertifikasi)->with('success', 'Data akun berhasil diperbarui!');
+        } catch (QueryException $e) {
+            return back()->with('failed','Data akun gagal diperbarui!');
         }
     }
 }

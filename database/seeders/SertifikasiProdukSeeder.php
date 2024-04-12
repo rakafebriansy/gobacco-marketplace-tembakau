@@ -17,7 +17,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->id_sertifikasi = 1;
         $sertifikasi->id_kecamatan = 1;
         $sertifikasi->id_petani = 1;
-        $sertifikasi->id_pengujian = 1;
+        $sertifikasi->id_pengujian = 2;
         $sertifikasi->id_status = 3;
         $sertifikasi->id_jenis_tembakau = 1;
         $sertifikasi->surat_izin_usaha = 'surat001' . '.jpg';
@@ -32,7 +32,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->id_kecamatan = 1;
         $sertifikasi->id_petani = 1;
         $sertifikasi->id_pengujian = 2;
-        $sertifikasi->id_status = 2;
+        $sertifikasi->id_status = 3;
         $sertifikasi->id_jenis_tembakau = 2;
         $sertifikasi->surat_izin_usaha = 'surat002' . '.jpg';
         $sertifikasi->tgl_serahsampel = fake()->date();

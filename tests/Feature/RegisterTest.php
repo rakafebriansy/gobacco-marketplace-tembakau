@@ -19,7 +19,7 @@ class RegisterTest extends TestCase
     }
     public function testView()
     {
-        $this->get('/petani/register')->assertSeeText('Petani | Register')->assertSeeText('Hello Guest');
+        $this->get('/petani/register')->assertSeeText('Petani | Register')->assertSeeText('SELAMAT DATANG DI GOBACCO!!');
     }
     public function test_Failed()
     {
@@ -48,7 +48,7 @@ class RegisterTest extends TestCase
             'id_kecamatan' => 'patrang',
             'telp_petani' => '081266732213',
             'noktp_petani' => '3729792394',
-        ])->assertRedirect('/petani/login');
+        ])->assertRedirect('/petani/register');
     }
     public function testAlreadyRegister()
     {

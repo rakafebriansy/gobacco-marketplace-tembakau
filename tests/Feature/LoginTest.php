@@ -41,7 +41,7 @@ class LoginTest extends TestCase
         $this->post('/petani/login',[
             'email_petani' => 'retha@gmail.com',
             'pw_petani' => '12345'
-        ])->assertRedirect('/petani/akun');
+        ])->assertRedirect('/petani/profil');
     }
     public function testLoginPemerintahView()
     {
@@ -61,7 +61,7 @@ class LoginTest extends TestCase
         $this->post('/pemerintah/login',[
             'email_pemerintah' => 'dinas001@gmail.com',
             'pw_pemerintah' => 'dinas123'
-        ])->assertRedirect('/pemerintah/akun');
+        ])->assertRedirect('/pemerintah/profil');
     }
     public function testLoginAdminView()
     {
@@ -81,6 +81,6 @@ class LoginTest extends TestCase
         $this->post('/admin/login',[
             'username' => 'admin@gmail.com',
             'password' => '99999'
-        ])->assertRedirect('/admin/akun');
+        ])->assertRedirect('/admin/profil');
     }
 }

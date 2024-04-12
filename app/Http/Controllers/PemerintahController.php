@@ -24,11 +24,11 @@ class PemerintahController extends Controller
         $pemerintah = Pemerintah::query()->where('email_pemerintah',$validated['email_pemerintah'])->where('pw_pemerintah',$validated['pw_pemerintah'])->first();
         if($pemerintah) {
             $request->session()->put('id_pemerintah',$pemerintah->id_pemerintah);
-            return redirect('/pemerintah/akun');
+            return redirect('/pemerintah/profil');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
     }
-    public function profil(Request $request)
+    public function melihatDataAkun(Request $request)
     {
         $id_pemerintah = $request->session()->get('id_pemerintah',null);
         if(isset($id_pemerintah)) {

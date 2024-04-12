@@ -27,11 +27,11 @@ class AdminController extends Controller
         if($admin) {
             $request->session()->regenerate();
             $request->session()->put('id_admin',$admin->id_admin);
-            return redirect('/admin/akun');
+            return redirect('/admin/profil');
         }
         return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
     }
-    public function profil(Request $request)
+    public function melihatDataAkun(Request $request)
     {
         $id_admin = $request->session()->get('id_admin',null);
         if(isset($id_admin)) {
@@ -44,6 +44,10 @@ class AdminController extends Controller
             return redirect('admin/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
+    // public function ()
+    // {
+        
+    // }
     public function akun()
     {
         return 'Hai';

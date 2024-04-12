@@ -27,8 +27,8 @@ return new class extends Migration
             $table->foreign('id_kecamatan')->on('kecamatans')->references('id_kecamatan');
             $table->foreign('id_petani')->on('petani_tembakaus')->references('id_petani');
             $table->foreign('id_pengujian')->on('jenis_pengujians')->references('id_pengujian');
-            $table->foreign('id_jenis_tembakau')->on('jenis_tembakaus')->references('id_jenis_tembakau')->onDelete('cascade');
-            $table->foreign('id_status')->on('status_ujis')->references('id_status')->onDelete('cascade');
+            $table->foreign('id_jenis_tembakau')->on('jenis_tembakaus')->references('id_jenis_tembakau');
+            $table->foreign('id_status')->on('status_ujis')->references('id_status');
         });
     }
 

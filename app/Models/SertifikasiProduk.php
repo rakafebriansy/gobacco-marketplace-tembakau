@@ -11,8 +11,8 @@ class SertifikasiProduk extends Model
     use HasFactory;
 
     protected $table = 'sertifikasi_produks';
-    protected $foreignKey = 'id_jenis_tembakau';
-    protected $relatedKey = 'id_status';
+    protected $primaryKey = 'id_sertifikasi';
+    protected $keyType = 'int';
     public $timestamps = false;
     protected $fillable = [
         'id_kecamatan',

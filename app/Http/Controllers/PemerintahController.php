@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kecamatan;
 use App\Models\Pemerintah;
+use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -87,6 +88,18 @@ class PemerintahController extends Controller
             return view('pemerintah.sertifikasi.table', [
                 'title' => 'Pemerintah | Sertifikasi',
                 'sertifikasis' => $sertifikasis
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function membuatPengajuanSertifikasi($id_sertifikasi)
+    {
+        if(isset($id_sertifikasi)) {
+            $sertifikasi = SertifikasiProduk::find($id_sertifikasi);
+            return view('pemerintah.sertifikasi.form', [
+                'title' => 'Pemerintah | Pengajuan Sertifikasi',
+                'sertifikasi' => $sertifikasi
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');

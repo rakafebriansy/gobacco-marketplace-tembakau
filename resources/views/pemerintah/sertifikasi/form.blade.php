@@ -7,6 +7,6 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    <h1>Username: {{ $username_pemerintah }}</h1>
+    <h1>Pengajuan Surat: {{ $sertifikasi->surat_izin_usaha }}</h1>
 </body>
 </html>

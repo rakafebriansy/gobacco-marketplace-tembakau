@@ -7,6 +7,6 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    <h1>Username: {{ $username_petani }}</h1>
+    <h1>Pengajuan Username: {{ $petani->username_petani }}</h1>
 </body>
 </html>

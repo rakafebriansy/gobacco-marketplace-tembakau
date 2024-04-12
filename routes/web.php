@@ -30,7 +30,8 @@ Route::prefix('/petani')->group(function() {
     Route::get('/akun/ubah',[PetaniController::class,'mengubahDataAkun']);
     Route::patch('/akun/ubah',[PetaniController::class,'postMengubahDataAkun']);
     Route::get('/sertifikasi',[PetaniController::class,'melihatPengajuanSertifikasi']);
-    Route::post('/sertifikasi',[PetaniController::class,'membuatPengajuanSertifikasi']);
+    Route::get('/sertifikasi/buat',[PetaniController::class,'membuatPengajuanSertifikasi']);
+    Route::post('/sertifikasi/buat',[PetaniController::class,'postMembuatPengajuanSertifikasi']);
 });
 
 Route::prefix('/pemerintah')->group(function(){
@@ -40,7 +41,8 @@ Route::prefix('/pemerintah')->group(function(){
     Route::get('/akun/ubah',[PemerintahController::class,'mengubahDataAkun']);
     Route::patch('/akun/ubah',[PemerintahController::class,'postMengubahDataAkun']);
     Route::get('/sertifikasi',[PemerintahController::class,'melihatPengajuanSertifikasi']);
-    Route::post('/sertifikasi',[PemerintahController::class,'membuatPengajuanSertifikasi']);
+    Route::get('/sertifikasi/buat/{id_sertifikasi}',[PemerintahController::class,'membuatPengajuanSertifikasi']);
+    Route::post('/sertifikasi/buat',[PemerintahController::class,'postMembuatPengajuanSertifikasi']);
 });
 
 Route::prefix('/admin')->group(function(){

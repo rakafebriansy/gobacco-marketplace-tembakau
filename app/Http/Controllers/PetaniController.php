@@ -125,4 +125,44 @@ class PetaniController extends Controller
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
+    public function membuatPengajuanSertifikasi(Request $request)
+    {
+        $id_petani = $request->session()->get('id_petani',null);
+        if(isset($id_petani)) {
+            $petani = PetaniTembakau::query()->find($id_petani);
+            return view('petani.sertifikasi.form', [
+                'title' => 'Petani | Pengajuan Sertifikasi',
+                'petani' => $petani
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMembuatPengajuanSertifikasi(Request $request)
+    {
+        $validated = $request->validate([
+            'id_kecamatan' => 'required',
+            'id_petani' => 'required',
+            'id_pengujian' => 'required',
+            'id_jenis_tembakau' => 'required',
+            'id_status' => 'required',
+            'surat_izin_usaha' => 'required',
+            'tgl_serahsampel' => 'required',
+            'berkas_lain' => 'required',
+            'bukti_tf' => 'required',
+        ]);
+        $surat_izin_usaha = $request->file('surat_izin_usaha');
+        $name1 = $surat_izin_usaha->getClientOriginalName();
+        $surat_izin_usaha->storePubliclyAs('surat_izin_usahas', $name1, 'public');
+
+        $berkas_lain = $request->file('berkas_lain');
+        $name2 = $berkas_lain->getClientOriginalName();
+        $berkas_lain->storePubliclyAs('berkas_lains', $name2, 'public');
+        
+        $bukti_tf = $request->file('bukti_tf');
+        $name3 = $bukti_tf->getClientOriginalName();
+        $bukti_tf->storePubliclyAs('bukti_tfs', $name3, 'public');
+        
+        return "Surat: $name1 Berkas: $name2 Bukti: $name3"; 
+    }
 }

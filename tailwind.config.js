@@ -16,6 +16,7 @@ module.exports = {
           button: '#FFB000',
           putih : '#EFF6E9',
           hitam : '#19191B',
+          modal : '#EFF6E9',
         }
       },
       fontFamily :{

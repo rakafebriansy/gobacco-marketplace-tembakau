@@ -776,10 +776,6 @@ video {
   margin-top: 1rem;
 }
 
-.mt-44 {
-  margin-top: 11rem;
-}
-
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -868,6 +864,10 @@ video {
   height: 24rem;
 }
 
+.h-\[80\%\] {
+  height: 80%;
+}
+
 .h-full {
   height: 100%;
 }
@@ -876,20 +876,8 @@ video {
   height: 100vh;
 }
 
-.h-\[\] {
-  height: ;
-}
-
-.h-\[80\] {
-  height: 80;
-}
-
-.h-\[80\%\] {
-  height: 80%;
-}
-
-.h-\[70\%\] {
-  height: 70%;
+.h-\[85\%\] {
+  height: 85%;
 }
 
 .max-h-40 {

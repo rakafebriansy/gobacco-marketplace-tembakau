@@ -19,6 +19,7 @@ module.exports = {
           modal : '#EFF6E9',
           tidak : '#ED0000',
           iya : '#3AB81B',
+          abu : '#9EA18C',
         }
       },
       fontFamily :{

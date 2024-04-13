@@ -29,7 +29,7 @@ class LoginTest extends TestCase
     }
     public function test_Petani()
     {
-        $this->get('/petani/login')->assertSeeText('Petani | Login')->assertSeeText('Hello Petani');
+        $this->get('/petani/login')->assertSeeText('Petani | Login')->assertSeeText('Masuk dengan akun anda');
     }
     public function test_PetaniFailed()
     {
@@ -43,7 +43,7 @@ class LoginTest extends TestCase
         $this->seed([JenisKelaminSeeder::class,KecamatanSeeder::class, PetaniTembakauSeeder::class]);
 
         $this->post('/petani/login',[
-            'email_petani' => 'retha@gmail.com',
+            'username_petani' => 'retha',
             'pw_petani' => '12345'
         ])->assertRedirect('/petani/akun');
     }

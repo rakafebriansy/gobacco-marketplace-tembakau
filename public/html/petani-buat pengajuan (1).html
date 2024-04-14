@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Gobacco</title>
+    <link rel="stylesheet" href="../dist/output.css">
+</head>
+<body>
+    <section class="font-poppins">
+        <div class="bg-light-primary relative">
+            <div class=" bg-light-secondary absolute top-0 w-full z-10 pl-56">
+                <ol class="flex items-center w-full mb-4 py-10">
+                    <li class="flex w-full items-center  after:content-[''] after:w-full after:h-1 after:border-b after:border-light-primary after:border-4 after:inline-block ">
+                        <div class="flex items-center justify-center w-10 h-10 bg-light-fill rounded-full lg:h-12 lg:w-12  shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">1</h1>
+                        </div>
+                    </li>
+                    <li class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-light-primary after:border-4 after:inline-block ">
+                        <div class="flex items-center justify-center border-2 border-light-primary w-10 h-10 bg-light-secondary rounded-full lg:h-12 lg:w-12  shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">2</h1>
+                        </div>
+                    </li>
+                    <li class="flex items-center w-full">
+                        <div class="flex items-center justify-center border-2 border-light-primary w-10 h-10 bg-light-secondary rounded-full lg:h-12 lg:w-12  shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">3</h1>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    
+
+    <div class="w-screen h-screen bg-light-primary relative">
+        <div class="bottom-0 pt-40">
+            <h3 class="mb-10 text-3xl text-center font-bold leading-none text-light-secondary">Form Pengajuan Sertifikasi</h3>
+            <div class="grid grid-cols-6 gap-8 pl-10 pr-10 ">
+                <div class="col-span-6 sm:col-span-3 ">
+                    <label for="nama" class="text-base font-medium text-light-secondary block mb-2 ">Nama Petani</label>
+                    <input type="text" name="nama" id="nama" class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400" required="">
+                </div>
+                <div class="col-span-6 sm:col-span-3  ">
+                    <label for="no-hp" class="text-base font-medium text-light-secondary block mb-2">Nomor Telepon</label>
+                    <input type="number" name="no-hp" id="no-hp" class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400" required="">
+                </div>
+                <div class="col-span-6 sm:col-span-3 ">
+                    <label for="alamat" class="text-base font-medium text-light-secondary block mb-2">Alamat </label>
+                    <input type="text" name="alamat" id="alamat" class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400" required="">
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="ktp" class="text-base font-medium text-light-secondary block mb-2">No KTP</label>
+                    <input type="number" name="ktp" id="ktp" class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400" required="">
+                </div>
+                
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="email" class="text-base font-medium text-light-secondary block mb-2">Email</label>
+                    <input type="email" name="email" id="email" class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"  required="">
+                </div>
+                <div class="col-span-6 sm:col-span-3">
+                    <label for="" class=""></label>
+                    <h3 type="" name="" id="" class=" bg-light-primary w-full p-2.5"  required=""></h3>
+                </div>
+            </div>
+            <div class="pt-6 pr-10 absolute right-0">
+                <button class=" text-center font-bold bg-light-button text-light-putih py-4 px-10 rounded-full hover:bg-opacity-80 focus:shadow-outline">
+                    <span class=" text-sm">
+                        Selanjutnya
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

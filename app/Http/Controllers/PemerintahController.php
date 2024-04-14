@@ -13,48 +13,31 @@ use Illuminate\Support\Facades\Session;
 
 class PemerintahController extends Controller
 {
-    public function login()
-    {
-        $id = Session::get('id_pemerintah');
-        if(isset($id)) return redirect('/pemerintah/akun');
-        return view('pemerintah.login', [
-            'title' => 'Pemerintah | Login'
-        ]);
-    }
-    public function postLogin(Request $request)
-    {
-        $validated = $request->validate([
-            'email_pemerintah' => 'required',
-            'pw_pemerintah' => 'required'
-        ]);
-        $pemerintah = Pemerintah::query()->where('email_pemerintah',$validated['email_pemerintah'])->where('pw_pemerintah',$validated['pw_pemerintah'])->first();
-        if($pemerintah) {
-            $request->session()->put('id_pemerintah',$pemerintah->id_pemerintah);
-            return redirect('/pemerintah/akun');
-        }
-        return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
-    }
     public function melihatDataAkun(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
-            return view('pemerintah.akun', [
+            $kecamatan = $pemerintah->kecamatan;
+            return view('pemerintah.akun.akun', [
                 'title' => 'Pemerintah | Profil',
-                'pemerintah' => $pemerintah
+                'pemerintah' => $pemerintah,
+                'kecamatan' => $kecamatan
             ]);
         } else {
-            return redirect('pemerintah/login')->with('failed','Silahkan login terlebih dahulu!');
+            return redirect('/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
     public function mengubahDataAkun(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
-            return view('pemerintah.ubahAkun', [
+            $kecamatan = $pemerintah->kecamatan;
+            return view('pemerintah.akun.ubahAkun', [
                 'title' => 'Pemerintah | Ubah Profil',
-                'pemerintah' => $pemerintah //put id in hidden input on view
+                'pemerintah' => $pemerintah,
+                'kecamatan' => $kecamatan
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -62,30 +45,41 @@ class PemerintahController extends Controller
     }
     public function postMengubahDataAkun(Request $request)
     {
-        var_dump('ld');
         $validated = $request->validate([
             'username_pemerintah' => 'required',
-            'pw_pemerintah' => 'required'
+            'pw_pemerintah' => 'required',
+            'email_pemerintah' => 'required',
+            'telp_pemerintah' => 'required',
+            'kecamatan' => 'required',
         ]);
-        $id_pemerintah = $request->session()->get('id_pemerintah', null);
-        var_dump($id_pemerintah);
+        $id_pemerintah = $request->session()->get('id', null);
         if(isset($id_pemerintah)) {
+            $kecamatan = Kecamatan::where('kecamatan',$validated['kecamatan'])->first();
             $row_affected = Pemerintah::query()->where('id_pemerintah',$id_pemerintah)->update([
                 'username_pemerintah' => $validated['username_pemerintah'],
-                'pw_pemerintah' => $validated['pw_pemerintah']
+                'pw_pemerintah' => $validated['pw_pemerintah'],
+                'email_pemerintah' => $validated['email_pemerintah'],
+                'telp_pemerintah' => $validated['telp_pemerintah'],
+                'id_kecamatan' => $kecamatan->id_kecamatan
             ]);
             if($row_affected) {
                 return redirect('/pemerintah/akun')->with('success','Data akun berhasil diperbarui!');
+            } else {
+                return redirect('/pemerintah/ubah')->withErrors(['db' => 'Data akun tidak berubah!']);
             }
         }
         return redirect('/')->with('failed','Data akun gagal diperbarui!');
     }
     public function melihatPengajuanSertifikasi(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $id_kecamatan = Pemerintah::query()->find($id_pemerintah)->id_kecamatan;
-            $sertifikasis = SertifikasiProduk::query()->where('id_kecamatan',$id_kecamatan)->get();
+            $sertifikasis = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.jenis_pengujian','jenis_tembakaus.*','petani_tembakaus.nama_petani')
+            ->where('sertifikasi_produks.id_kecamatan',$id_kecamatan)
+            ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+            ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+            ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->get();
             return view('pemerintah.sertifikasi.table', [
                 'title' => 'Pemerintah | Sertifikasi',
                 'sertifikasis' => $sertifikasis

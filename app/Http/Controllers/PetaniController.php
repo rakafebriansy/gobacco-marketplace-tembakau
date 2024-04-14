@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisKelamin;
+use App\Models\JenisPengujian;
 use App\Models\Kecamatan;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
@@ -17,7 +18,7 @@ class PetaniController extends Controller
 {
     public function register()
     {
-        $id = Session::get('id_petani');
+        $id = Session::get('id');
         if(isset($id)) return redirect('/petani/akun');
         return view('petani.register', [
             'title' => 'Petani | Register'
@@ -42,51 +43,33 @@ class PetaniController extends Controller
         $validated['id_kecamatan'] = $kecamatan->id_kecamatan;
         $validated['id_jenis_kelamin'] = $jenis_kelamin->id_jenis_kelamin;
         PetaniTembakau::create($validated);
-        return redirect('/petani/register')->with('success', 'Data akun berhasil dibuat!');
-    }
-    public function login()
-    {
-        $id = Session::get('id_petani');
-        if(isset($id)) return redirect('/petani/akun');
-        return view('petani.login', [
-            'title' => 'Petani | Login'
-        ]);
-    }
-    public function postLogin(Request $request)
-    {
-        $validated = $request->validate([
-            'username_petani' => 'required',
-            'pw_petani' => 'required'
-        ]);
-        $petani_tembakau = PetaniTembakau::query()->where('username_petani',$validated['username_petani'])->where('pw_petani',$validated['pw_petani'])->first();
-        if(isset($petani_tembakau)) {
-            $request->session()->put('id_petani',$petani_tembakau->id_petani);
-            return redirect('/petani/akun');
-        } else {
-            return redirect('/petani/login')->withErrors(['db' => 'Username atau password salah, Silakan coba lagi!']);    
-        }
+        return redirect('/register')->with('success', 'Data akun berhasil dibuat!');
     }
     public function melihatDataAkun(Request $request)
     {
-        $id_petani = $request->session()->get('id_petani',null);
+        $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
             $petani = PetaniTembakau::find($id_petani);
-            return view('petani.akun', [
+            $jenis_kelamin = JenisKelamin::find($petani->id_jenis_kelamin);
+            return view('petani.akun.akun', [
                 'title' => 'Petani | Profil',
-                'petani' => $petani
+                'petani' => $petani,
+                'jenis_kelamin' => $jenis_kelamin,
             ]);
         } else {
-            return redirect('petani/login')->with('failed','Silahkan login terlebih dahulu!');
+            return redirect('/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
     public function mengubahDataAkun(Request $request)
     {
-        $id_petani = $request->session()->get('id_petani',null);
+        $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
             $petani = PetaniTembakau::find($id_petani);
-            return view('petani.ubahAkun', [
+            $jenis_kelamin = JenisKelamin::find($petani->id_jenis_kelamin);
+            return view('petani.akun.ubahAkun', [
                 'title' => 'Petani | Ubah Profil',
-                'petani' => $petani //put id in hidden input on view
+                'petani' => $petani,
+                'jenis_kelamin' => $jenis_kelamin,
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -96,28 +79,48 @@ class PetaniController extends Controller
     {
         $validated = $request->validate([
             'username_petani' => 'required',
-            'pw_petani' => 'required'
+            'pw_petani' => 'required',
+            'nama_petani' => 'required',
+            'telp_petani' => 'required',
+            'email_petani' => 'required',
+            'alamat_petani' => 'required',
+            'noktp_petani' => 'required',
+            'jenis_kelamin' => 'required|in:laki-laki,perempuan',
         ]);
-        $id_petani = $request->session()->get('id_petani', null);
+        $id_petani = $request->session()->get('id', null);
         if(isset($id_petani)) {
+            $jenis_kelamin = JenisKelamin::query()->where('jenis_kelamin',$validated['jenis_kelamin'])->first();
             $row_affected = PetaniTembakau::query()->where('id_petani',$id_petani)->update([
                 'username_petani' => $validated['username_petani'],
-                'pw_petani' => $validated['pw_petani']
+                'pw_petani' => $validated['pw_petani'],
+                'nama_petani' => $validated['nama_petani'],
+                'telp_petani' => $validated['telp_petani'],
+                'email_petani' => $validated['email_petani'],
+                'alamat_petani' => $validated['alamat_petani'],
+                'noktp_petani' => $validated['noktp_petani'],
+                'id_jenis_kelamin' => $jenis_kelamin->id_jenis_kelamin,
             ]);
             if($row_affected) {
                 return redirect('/petani/akun')->with('success','Data akun berhasil diperbarui!');
+            } else {
+                return redirect('/petani/ubah')->withErrors(['db' => 'Data akun tidak berubah!']);
             }
         }
-        return redirect('/')->with('failed','Data akun gagal diperbarui!');
+        return redirect('/petani/ubah')->with('failed','Data akun gagal diperbarui!');
     }
     public function melihatPengajuanSertifikasi(Request $request)
     {
-        $id_petani = $request->session()->get('id_petani',null);
+        $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
-            $sertifikasis = SertifikasiProduk::query()->where('id_petani',1)->get();
+            $sertifikasis = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.jenis_pengujian','jenis_tembakaus.*','status_ujis.status_uji','petani_tembakaus.nama_petani')
+            ->where('sertifikasi_produks.id_petani',$id_petani)
+            ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+            ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+            ->join('status_ujis','status_ujis.id_status','=','sertifikasi_produks.id_status')
+            ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->get();
             return view('petani.sertifikasi.table', [
                 'title' => 'Petani | Sertifikasi',
-                'sertifikasis' => $sertifikasis
+                'sertifikasis' => $sertifikasis,
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -125,12 +128,14 @@ class PetaniController extends Controller
     }
     public function membuatPengajuanSertifikasi(Request $request)
     {
-        $id_petani = $request->session()->get('id_petani',null);
+        $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
             $petani = PetaniTembakau::query()->find($id_petani);
+            $kecamatan = Kecamatan::query()->find($petani->id_kecamatan);
             return view('petani.sertifikasi.form', [
                 'title' => 'Petani | Pengajuan Sertifikasi',
-                'petani' => $petani
+                'petani' => $petani,
+                'kecamatan' => $kecamatan,
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');

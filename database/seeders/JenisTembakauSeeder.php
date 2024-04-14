@@ -16,19 +16,19 @@ class JenisTembakauSeeder extends Seeder
         $jenis_tembakau = new JenisTembakau();
         $jenis_tembakau->id_jenis_tembakau = 1;
         $jenis_tembakau->jenis_tembakau = 'Voor Oogst (VO)';
-        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->gmb_tembakau = 'Setosa.png';
         $jenis_tembakau->save();
 
         $jenis_tembakau = new JenisTembakau();
         $jenis_tembakau->id_jenis_tembakau = 2;
         $jenis_tembakau->jenis_tembakau = 'No Oogst (NO)';
-        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->gmb_tembakau = 'Versicolor.png';
         $jenis_tembakau->save();
         
         $jenis_tembakau = new JenisTembakau();
         $jenis_tembakau->id_jenis_tembakau = 3;
         $jenis_tembakau->jenis_tembakau = 'Virginia';
-        $jenis_tembakau->gmb_tembakau = fake()->word() . '.png';
+        $jenis_tembakau->gmb_tembakau = 'Virginica.png';
         $jenis_tembakau->save();
     }
 }

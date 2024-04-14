@@ -614,6 +614,10 @@ video {
   grid-column: span 8 / span 8;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
 .row-span-1 {
   grid-row: span 1 / span 1;
 }
@@ -875,6 +879,34 @@ video {
   height: 100vh;
 }
 
+.h-\[70\$\] {
+  height: 70$;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[8rem\] {
+  height: 8rem;
+}
+
+.h-\[10rem\] {
+  height: 10rem;
+}
+
+.h-\[40\%\] {
+  height: 40%;
+}
+
+.h-\[9rem\] {
+  height: 9rem;
+}
+
+.h-\[8\.5rem\] {
+  height: 8.5rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -959,6 +991,26 @@ video {
   width: 100vw;
 }
 
+.w-60 {
+  width: 15rem;
+}
+
+.w-\[60\%\] {
+  width: 60%;
+}
+
+.w-\[60\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\] {
+  width: 60////////////////;
+}
+
+.w-\[60\$\] {
+  width: 60$;
+}
+
+.w-\[60\] {
+  width: 60;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1026,8 +1078,16 @@ video {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
+.grid-cols-9 {
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
 .grid-rows-5 {
   grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-4 {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 .flex-col {

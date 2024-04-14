@@ -57,7 +57,7 @@
                             </div>
                             Dashboard
                         </a>
-                        <a href="/pemerintah/sertifikasi" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
+                        <a href="/petani/sertifikasi" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
                             <div class="">
                                 <img src="../images/Haruki Icons (2).svg" class="w-3/4">
                             </div>

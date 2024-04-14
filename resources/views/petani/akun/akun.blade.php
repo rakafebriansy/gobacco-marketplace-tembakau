@@ -25,7 +25,7 @@
                             </div>
                             Dashboard
                         </a>
-                        <a href="/pemerintah/sertifikasi" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
+                        <a href="/petani/sertifikasi" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
                             <div class="">
                                 <img src="../images/Haruki Icons (2).svg" class="w-3/4">
                             </div>
@@ -52,7 +52,7 @@
                         <div class="flex items-center py-2 px-4 mt-0 space-x-4 justify-self-end">                        
                             <img src="../images/profil.svg" alt="" class="w-12 h-12 rounded-lg dark:bg-gray-500">
                             <div>
-                                <h2 class="text-base font-normal text-light-primary">Nur Kholis</h2>
+                                <h2 class="text-base font-normal text-light-primary">{{ $petani->nama_petani }}</h2>
                                 <span class="flex items-center space-x-1 text-sm text-light-primary">
                                     <h1>Petani</h1>
                                 </span>

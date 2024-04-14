@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisKelamin;
+use App\Models\JenisPengujian;
 use App\Models\Kecamatan;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
@@ -111,10 +112,15 @@ class PetaniController extends Controller
     {
         $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
-            $sertifikasis = SertifikasiProduk::query()->where('id_petani',1)->get();
+            $sertifikasis = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.jenis_pengujian','jenis_tembakaus.*','status_ujis.status_uji','petani_tembakaus.nama_petani')
+            ->where('sertifikasi_produks.id_petani',$id_petani)
+            ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+            ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+            ->join('status_ujis','status_ujis.id_status','=','sertifikasi_produks.id_status')
+            ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->get();
             return view('petani.sertifikasi.table', [
                 'title' => 'Petani | Sertifikasi',
-                'sertifikasis' => $sertifikasis
+                'sertifikasis' => $sertifikasis,
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -125,9 +131,11 @@ class PetaniController extends Controller
         $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
             $petani = PetaniTembakau::query()->find($id_petani);
+            $kecamatan = Kecamatan::query()->find($petani->id_kecamatan);
             return view('petani.sertifikasi.form', [
                 'title' => 'Petani | Pengajuan Sertifikasi',
-                'petani' => $petani
+                'petani' => $petani,
+                'kecamatan' => $kecamatan,
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');

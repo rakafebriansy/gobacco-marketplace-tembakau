@@ -11,8 +11,18 @@ class SertifikasiProdukSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
     public function run(): void
     {
+        $this->call([
+            JenisKelaminSeeder::class,
+            KecamatanSeeder::class,
+            PemerintahSeeder::class,
+            PetaniTembakauSeeder::class,
+            StatusUjiSeeder::class,
+            JenisTembakauSeeder::class,
+            JenisPengujianSeeder::class,
+        ]);
         $sertifikasi = new SertifikasiProduk();
         $sertifikasi->id_sertifikasi = 1;
         $sertifikasi->id_kecamatan = 1;

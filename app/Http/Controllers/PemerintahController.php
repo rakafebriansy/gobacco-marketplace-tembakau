@@ -75,7 +75,11 @@ class PemerintahController extends Controller
         $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $id_kecamatan = Pemerintah::query()->find($id_pemerintah)->id_kecamatan;
-            $sertifikasis = SertifikasiProduk::query()->where('id_kecamatan',$id_kecamatan)->get();
+            $sertifikasis = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.jenis_pengujian','jenis_tembakaus.*','petani_tembakaus.nama_petani')
+            ->where('sertifikasi_produks.id_kecamatan',$id_kecamatan)
+            ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+            ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+            ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->get();
             return view('pemerintah.sertifikasi.table', [
                 'title' => 'Pemerintah | Sertifikasi',
                 'sertifikasis' => $sertifikasis

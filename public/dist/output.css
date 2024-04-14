@@ -594,6 +594,14 @@ video {
   top: 10rem;
 }
 
+.top-0 {
+  top: 0px;
+}
+
+.top-40 {
+  top: 10rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -614,6 +622,10 @@ video {
   grid-column: span 3 / span 3;
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
@@ -622,8 +634,16 @@ video {
   grid-column: span 8 / span 8;
 }
 
-.row-span-2 {
-  grid-row: span 2 / span 2;
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
 }
 
 .m-10 {
@@ -871,6 +891,55 @@ video {
   height: 100vh;
 }
 
+
+.h-\[20\] {
+  height: 20;
+}
+
+.h-\[20rem\] {
+  height: 20rem;
+}
+
+.h-\[12rem\] {
+  height: 12rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.h-\[\'\'\] {
+  height: '';
+}
+
+.h-\[5rem\] {
+  height: 5rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-\[7rem\] {
+  height: 7rem;
+}
+
+.h-\[70\%\] {
+  height: 70%;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-\[80\%\] {
+  height: 80%;
+}
+
+.max-h-40 {
+  max-height: 10rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -939,6 +1008,14 @@ video {
   width: 80%;
 }
 
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
 .w-\[90\%\] {
   width: 90%;
 }
@@ -953,6 +1030,18 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[80\%\] {
+  width: 80%;
 }
 
 .max-w-7xl {
@@ -1018,6 +1107,10 @@ video {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
 .grid-rows-5 {
   grid-template-rows: repeat(5, minmax(0, 1fr));
 }
@@ -1044,6 +1137,14 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
 }
 
 .gap-0 {
@@ -1453,8 +1554,16 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .pb-8 {
   padding-bottom: 2rem;
+}
+
+.pl-10 {
+  padding-left: 2.5rem;
 }
 
 .pl-10 {
@@ -1477,8 +1586,24 @@ video {
   padding-left: 14rem;
 }
 
+.pl-32 {
+  padding-left: 8rem;
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pl-56 {
+  padding-left: 14rem;
+}
+
 .pr-0 {
   padding-right: 0px;
+}
+
+.pr-10 {
+  padding-right: 2.5rem;
 }
 
 .pr-10 {

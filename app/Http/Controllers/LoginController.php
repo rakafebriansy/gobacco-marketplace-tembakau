@@ -41,4 +41,9 @@ class LoginController extends Controller
         }
         return redirect('/login')->withErrors(['db' => 'Username atau password salah, Silakan coba lagi!']);    
     }
+    public function logout()
+    {
+        Session::flush();
+        return redirect('/login');
+    }
 }

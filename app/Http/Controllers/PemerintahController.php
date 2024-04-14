@@ -18,9 +18,11 @@ class PemerintahController extends Controller
         $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
+            $kecamatan = $pemerintah->kecamatan;
             return view('pemerintah.akun.akun', [
                 'title' => 'Pemerintah | Profil',
-                'pemerintah' => $pemerintah
+                'pemerintah' => $pemerintah,
+                'kecamatan' => $kecamatan
             ]);
         } else {
             return redirect('/login')->with('failed','Silahkan login terlebih dahulu!');
@@ -31,9 +33,11 @@ class PemerintahController extends Controller
         $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
+            $kecamatan = $pemerintah->kecamatan;
             return view('pemerintah.akun.ubahAkun', [
                 'title' => 'Pemerintah | Ubah Profil',
-                'pemerintah' => $pemerintah //put id in hidden input on view
+                'pemerintah' => $pemerintah,
+                'kecamatan' => $kecamatan
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -41,20 +45,27 @@ class PemerintahController extends Controller
     }
     public function postMengubahDataAkun(Request $request)
     {
-        var_dump('ld');
         $validated = $request->validate([
             'username_pemerintah' => 'required',
-            'pw_pemerintah' => 'required'
+            'pw_pemerintah' => 'required',
+            'email_pemerintah' => 'required',
+            'telp_pemerintah' => 'required',
+            'kecamatan' => 'required',
         ]);
         $id_pemerintah = $request->session()->get('id', null);
-        var_dump($id_pemerintah);
         if(isset($id_pemerintah)) {
+            $kecamatan = Kecamatan::where('kecamatan',$validated['kecamatan'])->get();
             $row_affected = Pemerintah::query()->where('id_pemerintah',$id_pemerintah)->update([
                 'username_pemerintah' => $validated['username_pemerintah'],
-                'pw_pemerintah' => $validated['pw_pemerintah']
+                'pw_pemerintah' => $validated['pw_pemerintah'],
+                'email_pemerintah' => $validated['email_pemerintah'],
+                'telp_pemerintah' => $validated['telp_pemerintah'],
+                'id_kecamatan' => $kecamatan[0]->id_kecamatan
             ]);
             if($row_affected) {
                 return redirect('/pemerintah/akun')->with('success','Data akun berhasil diperbarui!');
+            } else {
+                return redirect('/pemerintah/ubah')->withErrors(['db' => 'Data akun tidak berubah!']);
             }
         }
         return redirect('/')->with('failed','Data akun gagal diperbarui!');

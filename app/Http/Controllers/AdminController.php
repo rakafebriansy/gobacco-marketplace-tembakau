@@ -51,8 +51,10 @@ class AdminController extends Controller
             ]);
             if($row_affected) {
                 return redirect('/admin/akun')->with('success','Data akun berhasil diperbarui!');
+            } else {
+                return redirect('/admin/ubah')->withErrors(['db' => 'Data akun tidak berubah!']);
             }
         }
-        return redirect('/')->with('failed','Data akun gagal diperbarui!');
+        return redirect('/admin/ubah')->with('failed','Data akun gagal diperbarui!');
     }
 }

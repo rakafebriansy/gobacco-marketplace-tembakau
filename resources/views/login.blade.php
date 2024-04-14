@@ -14,7 +14,7 @@
         <div class="min-h-screen flex justify-center">
             <div class="max-w-screen bg-light-primary shadow flex justify-center flex-1">
                 <div class="">                
-                    <form class="mt-12 flex flex-col items-center" action="/petani/login" method="POST">
+                    <form class="mt-12 flex flex-col items-center" action="/login" method="POST">
                         @csrf
                         <h1 class="text-3xl font-extrabold text-light-secondary opacity-70">
                             Login
@@ -30,12 +30,12 @@
                             <div class="mx-auto max-w-xs mt-10"><span class="px-3 text-light-secondary opacity-70 font-bold">Username</span>
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-light-fill bg-opacity-50  text-light-secondary text-sm focus:outline-slate-400 mt-2"
-                                    type="text" name="username_petani" />
+                                    type="text" name="username" />
                             </div>
                             <div class="mx-auto max-w-xs mt-4"><span class="px-3 text-light-secondary opacity-70 font-bold">Password</span>
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-light-fill bg-opacity-50  text-light-secondary text-sm  focus:outline-slate-400 focus:shadow-sm mt-2"
-                                    type="password" name="pw_petani" />
+                                    type="password" name="password" />
                             </div>
                             <div class="my-12 text-center">
                                 <div

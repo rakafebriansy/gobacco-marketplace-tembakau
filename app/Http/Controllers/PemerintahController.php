@@ -13,46 +13,25 @@ use Illuminate\Support\Facades\Session;
 
 class PemerintahController extends Controller
 {
-    public function login()
-    {
-        $id = Session::get('id_pemerintah');
-        if(isset($id)) return redirect('/pemerintah/akun');
-        return view('pemerintah.login', [
-            'title' => 'Pemerintah | Login'
-        ]);
-    }
-    public function postLogin(Request $request)
-    {
-        $validated = $request->validate([
-            'email_pemerintah' => 'required',
-            'pw_pemerintah' => 'required'
-        ]);
-        $pemerintah = Pemerintah::query()->where('email_pemerintah',$validated['email_pemerintah'])->where('pw_pemerintah',$validated['pw_pemerintah'])->first();
-        if($pemerintah) {
-            $request->session()->put('id_pemerintah',$pemerintah->id_pemerintah);
-            return redirect('/pemerintah/akun');
-        }
-        return back()->with('failed','Username atau password salah, Silahkan coba lagi!');    
-    }
     public function melihatDataAkun(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
-            return view('pemerintah.akun', [
+            return view('pemerintah.akun.akun', [
                 'title' => 'Pemerintah | Profil',
                 'pemerintah' => $pemerintah
             ]);
         } else {
-            return redirect('pemerintah/login')->with('failed','Silahkan login terlebih dahulu!');
+            return redirect('/login')->with('failed','Silahkan login terlebih dahulu!');
         }
     }
     public function mengubahDataAkun(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $pemerintah = Pemerintah::find($id_pemerintah);
-            return view('pemerintah.ubahAkun', [
+            return view('pemerintah.akun.ubahAkun', [
                 'title' => 'Pemerintah | Ubah Profil',
                 'pemerintah' => $pemerintah //put id in hidden input on view
             ]);
@@ -67,7 +46,7 @@ class PemerintahController extends Controller
             'username_pemerintah' => 'required',
             'pw_pemerintah' => 'required'
         ]);
-        $id_pemerintah = $request->session()->get('id_pemerintah', null);
+        $id_pemerintah = $request->session()->get('id', null);
         var_dump($id_pemerintah);
         if(isset($id_pemerintah)) {
             $row_affected = Pemerintah::query()->where('id_pemerintah',$id_pemerintah)->update([
@@ -82,7 +61,7 @@ class PemerintahController extends Controller
     }
     public function melihatPengajuanSertifikasi(Request $request)
     {
-        $id_pemerintah = $request->session()->get('id_pemerintah',null);
+        $id_pemerintah = $request->session()->get('id',null);
         if(isset($id_pemerintah)) {
             $id_kecamatan = Pemerintah::query()->find($id_pemerintah)->id_kecamatan;
             $sertifikasis = SertifikasiProduk::query()->where('id_kecamatan',$id_kecamatan)->get();

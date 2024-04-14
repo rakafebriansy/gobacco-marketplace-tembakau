@@ -54,13 +54,13 @@ class PemerintahController extends Controller
         ]);
         $id_pemerintah = $request->session()->get('id', null);
         if(isset($id_pemerintah)) {
-            $kecamatan = Kecamatan::where('kecamatan',$validated['kecamatan'])->get();
+            $kecamatan = Kecamatan::where('kecamatan',$validated['kecamatan'])->first();
             $row_affected = Pemerintah::query()->where('id_pemerintah',$id_pemerintah)->update([
                 'username_pemerintah' => $validated['username_pemerintah'],
                 'pw_pemerintah' => $validated['pw_pemerintah'],
                 'email_pemerintah' => $validated['email_pemerintah'],
                 'telp_pemerintah' => $validated['telp_pemerintah'],
-                'id_kecamatan' => $kecamatan[0]->id_kecamatan
+                'id_kecamatan' => $kecamatan->id_kecamatan
             ]);
             if($row_affected) {
                 return redirect('/pemerintah/akun')->with('success','Data akun berhasil diperbarui!');

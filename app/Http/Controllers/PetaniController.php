@@ -218,47 +218,28 @@ class PetaniController extends Controller
             'id_sertifikasi' => 'required',
             'id_pengujian' => 'required',
             'id_jenis_tembakau' => 'required',
-            'gmb_tembakau' => 'required',
-            'surat_izin_usaha' => 'required',
             'tgl_serahsampel' => 'required',
             'produk_tembakau' => 'required',
-            'berkas_lain' => 'required',
-            'bukti_tf' => 'required',
         ]);
 
         $jenis_tembakau = JenisTembakau::query()->where('jenis_tembakau', $validated['id_jenis_tembakau'])->first();
-        
-        $gmb_tembakau = $request->file('gmb_tembakau');
-        $name0 = $gmb_tembakau->getClientOriginalName();
-        $gmb_tembakau->storePubliclyAs('gmb_tembakaus', $name0, 'public');
 
-        $surat_izin_usaha = $request->file('surat_izin_usaha');
-        $name1 = $surat_izin_usaha->getClientOriginalName();
-        $surat_izin_usaha->storePubliclyAs('surat_izin_usahas', $name1, 'public');
-
-        $berkas_lain = $request->file('berkas_lain');
-        $name2 = $berkas_lain->getClientOriginalName();
-        $berkas_lain->storePubliclyAs('berkas_lains', $name2, 'public');
-        
-        $bukti_tf = $request->file('bukti_tf');
-        $name3 = $bukti_tf->getClientOriginalName();
-        $bukti_tf->storePubliclyAs('bukti_tfs', $name3, 'public');
         SertifikasiProduk::query()->where('id_sertifikasi',$validated['id_sertifikasi'])->update([
-            'id_petani' => $id_petani,
             'id_pengujian' => $validated['id_pengujian'],
             'id_jenis_tembakau' => $jenis_tembakau->id_jenis_tembakau,
-            'gmb_tembakau' => $name0,
             'id_status' => 3,
-            'surat_izin_usaha' => $name1,
             'produk_tembakau' => $validated['produk_tembakau'],
             'tgl_serahsampel' => $validated['tgl_serahsampel'],
-            'berkas_lain' => $name2,
-            'bukti_tf' => $name3,
         ]);
-        redirect('/petani/sertifikasi')->with('success', 'Data berhasil disimpan');
+        return redirect('/petani/sertifikasi')->with('success', 'Data berhasil disimpan');
+    }
+    public function postBatalMengeditPengajuanSertifikasi(Request $request)
+    {
+        SertifikasiProduk::query()->where('id_sertifikasi',$request->id_sertifikasi)->delete();
+        return redirect('/petani/sertifikasi')->with('deleted', '-');
     }
     public function downloadFile(string $folder_name, string $file_name)
     {
-        return Storage::download('/' . $folder_name .'/' . $file_name);
+        return Storage::disk('public')->download($folder_name .'/' . $file_name);
     }
 }

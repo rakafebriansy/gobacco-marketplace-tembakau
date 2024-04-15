@@ -93,21 +93,21 @@
                                 <div class="">
                                     <label for="nama_petani" class="text-base font-medium text-light-secondary block mb-2 ">Nama
                                         Petani</label>
-                                    <input type="text" value="{{ $sertifikasi->nama_petani }}" name="nama_petani" id="nama_petani"
+                                    <input disabled type="text" value="{{ $sertifikasi->nama_petani }}" name="nama_petani" id="nama_petani"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
                                 <div class="">
                                     <label for="alamat_petani" class="text-base font-medium text-light-secondary block mb-2">Alamat
                                     </label>
-                                    <input type="text" value="{{ $sertifikasi->alamat_petani }}" name="alamat_petani" id="alamat"
+                                    <input disabled type="text" value="{{ $sertifikasi->alamat_petani }}" name="alamat_petani" id="alamat"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
                                 <div class=""">
                                     <label for=" email" class="text-base font-medium text-light-secondary block mb-2">
                                     Email</label>
-                                    <input type="email" value="{{ $sertifikasi->email_petani }}" name="email_petani" id="email"
+                                    <input disabled type="email" value="{{ $sertifikasi->email_petani }}" name="email_petani" id="email"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
@@ -119,7 +119,7 @@
                                         <label for="no-hp"
                                             class="text-base font-medium text-light-secondary block mb-2">Nomor
                                             Telepon</label>
-                                        <input type="text" value="{{ $sertifikasi->telp_petani }}" name="telp_petani" id="telp_petani"
+                                        <input disabled type="text" value="{{ $sertifikasi->telp_petani }}" name="telp_petani" id="telp_petani"
                                             class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                             >
                                     </div>
@@ -127,7 +127,7 @@
                                     <div class=""">
                                         <label for=" ktp" class="text-base font-medium text-light-secondary block mb-2">No
                                         KTP</label>
-                                        <input type="number" value="{{ $sertifikasi->noktp_petani }}" name="noktp_petani" id="noktp_petani"
+                                        <input disabled type="number" value="{{ $sertifikasi->noktp_petani }}" name="noktp_petani" id="noktp_petani"
                                             class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                             >
                                     </div>
@@ -160,8 +160,6 @@
                                         <div class="flex items-center">
                                             <img class="col-span-1" id="foto-tembakau" src="../../storage/gmb_tembakaus/{{ $sertifikasi->gmb_tembakau }}" alt="" class=" w-20">
                                         </div>
-                                        <input type="file" name="gmb_tembakau" id="gmb_tembakau" value="{{ $sertifikasi->gmb_tembakau }}"
-                                            class=" invisible col-span-1 shadow-sm h-[80%] w-full bg-light-fill bg-opacity-50 text-light-secondary rounded-lg p-2.5 box-border focus:outline-slate-400">
                                     </div>
                                 </label>
                             </div>
@@ -255,54 +253,69 @@
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class=" cursor-pointer rounded-full w-[11rem] text-center bg-light-primary px-10 py-4 text-sm font-bold text-light-button border border-3 border-light-button">Sebelumnya
                             </button>
                         </div>
-                        <div class="col-span-5"></div>
-                        <div class="col-span-1 flex justify-end items-center">
+                        <div class="col-span-3"></div>
+                        <div class="col-span-3 flex justify-end items-center">
                             <button type="button" id="nextBtn" onclick="nextPrev(1)"
                                 class="text-center text-sm font-bold bg-light-button text-light-putih py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
                                 Selanjutnya
                             </button>
-                            <button id="kirimBtn" onclick="openModal('modelAju')"
-                                class="text-center text-sm font-bold bg-light-button text-light-putih py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
-                                Kirim
-                            </button>
+                            <div id="kirimBtn" class="inline-flex justify-between w-full">
+                                <button type="button" id="tolakBtn" onclick="openModal('modelBatal')"
+                                    class="text-center text-sm font-bold bg-[#ED0000]/50 text-[#ED0000] py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
+                                    Batalkan Pengajuan
+                                </button>
+                                <button type="submit" onclick="openModal('modelKonfirmSertif')" id="konfirmBtn"
+                                    class="text-center text-sm font-bold bg-[#3AB81B] text-[#004225] py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
+                                    Simpan
+                                </button>
+                            </div>
                         </div>
                         <div class="col-span-1"></div>
                     </div>
                 </div>
             </div>
         </section>
-        <div id="modelAju" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
-            <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
-        
-                <div class="flex justify-end p-2">
-                    <button onclick="closeModal('modelConfirm')" type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-        
-                <div class="p-6 pt-0 text-center">
+
+    </form>
+    <div id="modelBatal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
+    
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('modelBatal')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+
+                            
+                    </svg>
+                </button>
+            </div>
+    
+            <div class="p-6 pt-0 text-center">
+                <form action="/petani/batal" method="post">
+                    @csrf
                     <div class="mx-auto flex items-center justify-center h-32 w-32 rounded-full">
-                        <img src="../../images/image 18.svg" class="">
+                        <img src="../../images/image 31.svg" class="">
                     </div>
                     
-                    <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Yakin Mengajukan Sertifikasi?</h3>
-                    <button type="button" onclick="closeModal('modelConfirm')"
+                    <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Yakin Melakukan Pembatalan Pengajuan Sertifikasi?</h3>
+                    <button type="button" onclick="closeModal('modelBatal')"
                         class="text-white bg-light-tidak hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
                         Tidak
                     </button>
-                    <button type="submit"
+                    <button type="submit" onclick="closeModal('modelBatal')"
                         class="text-white bg-light-iya hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
                         Iya
                     </button>             
-                </div> 
-            </div>
+                    <input type="hidden" name="id_sertifikasi" value="{{ $sertifikasi->id_sertifikasi }}" id="">
+                </form>
+            </div> 
         </div>
-    </form>
+    </div>
+
+
     @if($errors->any())
     <div id="modelConfirm" class="fixed z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
         <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
@@ -395,7 +408,7 @@
         }
         if (n == (x.length - 1)) {
             document.getElementById("nextBtn").style.display = 'none';
-            document.getElementById("kirimBtn").style.display = 'inline';
+            document.getElementById("kirimBtn").style.display = 'inline-flex';
         } else {
             document.getElementById("nextBtn").style.display = 'inline';
             document.getElementById("kirimBtn").style.display = 'none';

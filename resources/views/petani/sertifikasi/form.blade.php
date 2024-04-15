@@ -92,21 +92,21 @@
                                 <div class="">
                                     <label for="nama_petani" class="text-base font-medium text-light-secondary block mb-2 ">Nama
                                         Petani</label>
-                                    <input type="text" value="{{ $petani->nama_petani }}" name="nama_petani" id="nama_petani"
+                                    <input disabled type="text" value="{{ $petani->nama_petani }}" name="nama_petani" id="nama_petani"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
                                 <div class="">
                                     <label for="alamat_petani" class="text-base font-medium text-light-secondary block mb-2">Alamat
                                     </label>
-                                    <input type="text" value="{{ $petani->alamat_petani }}" name="alamat_petani" id="alamat"
+                                    <input disabled type="text" value="{{ $petani->alamat_petani }}" name="alamat_petani" id="alamat"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
                                 <div class=""">
                                     <label for=" email" class="text-base font-medium text-light-secondary block mb-2">
                                     Email</label>
-                                    <input type="email" value="{{ $petani->email_petani }}" name="email_petani" id="email"
+                                    <input disabled type="email" value="{{ $petani->email_petani }}" name="email_petani" id="email"
                                         class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                         >
                                 </div>
@@ -118,7 +118,7 @@
                                         <label for="no-hp"
                                             class="text-base font-medium text-light-secondary block mb-2">Nomor
                                             Telepon</label>
-                                        <input type="text" value="{{ $petani->telp_petani }}" name="telp_petani" id="telp_petani"
+                                        <input disabled type="text" value="{{ $petani->telp_petani }}" name="telp_petani" id="telp_petani"
                                             class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                             >
                                     </div>
@@ -126,7 +126,7 @@
                                     <div class=""">
                                         <label for=" ktp" class="text-base font-medium text-light-secondary block mb-2">No
                                         KTP</label>
-                                        <input type="number" value="{{ $petani->noktp_petani }}" name="noktp_petani" id="noktp_petani"
+                                        <input disabled type="number" value="{{ $petani->noktp_petani }}" name="noktp_petani" id="noktp_petani"
                                             class="shadow-sm bg-light-fill bg-opacity-50 text-light-secondary rounded-lg block w-full p-2.5 focus:outline-slate-400"
                                             >
                                     </div>
@@ -277,7 +277,7 @@
                                 class="text-center text-sm font-bold bg-light-button text-light-putih py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
                                 Selanjutnya
                             </button>
-                            <button id="kirimBtn" onclick="openModal('modelAju')"
+                            <button id="kirimBtn" onclick="openModal('modelAju')" type="button"
                                 class="text-center text-sm font-bold bg-light-button text-light-putih py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
                                 Kirim
                             </button>
@@ -291,7 +291,7 @@
             <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
         
                 <div class="flex justify-end p-2">
-                    <button onclick="closeModal('modelConfirm')" type="button"
+                    <button onclick="closeModal('modelAju')" type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -307,7 +307,7 @@
                     </div>
                     
                     <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Yakin Mengajukan Sertifikasi?</h3>
-                    <button type="button" onclick="closeModal('modelConfirm')"
+                    <button type="button" onclick="closeModal('modelAju')"
                         class="text-white bg-light-tidak hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
                         Tidak
                     </button>

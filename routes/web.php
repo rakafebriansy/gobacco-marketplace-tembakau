@@ -36,6 +36,7 @@ Route::prefix('/petani')->group(function() {
     Route::post('/buat',[PetaniController::class,'postMembuatPengajuanSertifikasi']);
     Route::post('/edit',[PetaniController::class,'postMengeditPengajuanSertifikasi']);
     Route::get('/edit/{id_sertifikasi}',[PetaniController::class,'mengeditPengajuanSertifikasi']);
+    Route::post('/batal',[PetaniController::class,'postBatalMengeditPengajuanSertifikasi']);
     Route::get('/download/{folder_name}/{file_name}', [PetaniController::class, 'downloadFile']);
 });
 

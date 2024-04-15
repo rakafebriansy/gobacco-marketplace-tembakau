@@ -174,6 +174,37 @@
             </div> 
         </div>
     </div>
+    @elseif (session('deleted'))
+    <div id="modelBatal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
+    
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('modelBatal')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+
+                            
+                    </svg>
+                </button>
+            </div>
+    
+            <div class="p-6 pt-0 text-center">
+                <div class="mx-auto flex items-center justify-center h-32 w-32 rounded-full">
+                    <img src="../images/image 32.svg" class="">
+                </div>
+                
+                <h3 class="text-2xl font-bold text-light-tidak mt-5 ">Yahh</h3>
+                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Data Pengajuan Sertifikasi Produk Berhasil Dibatalkan!</h3>
+                <button type="button" onclick="closeModal('modelBatal')"
+                    class="text-white bg-light-button hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
+                    Oke
+                </button>             
+            </div> 
+        </div>
+    </div>
     @endif
 
 <script>

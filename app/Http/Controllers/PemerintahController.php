@@ -149,6 +149,6 @@ class PemerintahController extends Controller
     }
     public function downloadFile(string $folder_name, string $file_name)
     {
-        return Storage::download('/' . $folder_name .'/' . $file_name);
+        return Storage::disk('public')->download($folder_name .'/' . $file_name);
     }
 }

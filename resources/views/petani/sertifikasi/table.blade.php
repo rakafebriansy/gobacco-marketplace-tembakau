@@ -114,12 +114,21 @@
                                                     <td class="py-1 px-2">
                                                         <a href="#" class="cursor-pointer rounded-full bg-light-button px-2 py-1 text-xs font-normal text-light-putih hover:bg-opacity-80">Lihat Detail                               
                                                         </a>
-                                                        <button
-                                                            class="text-center font-normal bg-light-abu text-light-putih py-1 px-2 rounded-full hover:bg-gray-400 focus:shadow-outline ml-1 ">
-                                                            <span class=" text-xs">
-                                                                Edit Data
-                                                            </span>
-                                                        </button>
+                                                        @if (isset($sertifikasi->hasil_pengujian))
+                                                            <a
+                                                                class="text-center font-normal bg-light-abu text-light-putih py-1 px-2 rounded-full hover:bg-gray-400 focus:shadow-outline ml-1 " disabled>
+                                                                <span class=" text-xs">
+                                                                    Edit Data
+                                                                </span>
+                                                            </a>
+                                                        @else 
+                                                            <a href="/petani/edit/{{ $sertifikasi->id_sertifikasi }}"
+                                                                class="text-center font-normal bg-lime-400 text-light-putih py-1 px-2 rounded-full hover:bg-lime-300 focus:shadow-outline ml-1 ">
+                                                                <span class=" text-xs">
+                                                                    Edit Data
+                                                                </span>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -157,8 +166,7 @@
                 </div>
                 
                 <h3 class="text-xl font-bold text-light-iya mt-5 ">BERHASIL!!</h3>
-                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Pengajuan Sertifikasi Produk Berhasil Diajukan
-                    Mohon Menunggu Informasi Selanjutnya! </h3>
+                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">{{ Session::get('success') }} </h3>
                 <button type="button" onclick="closeModal('modelConfirm')"
                     class="text-white bg-light-button hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
                     Oke

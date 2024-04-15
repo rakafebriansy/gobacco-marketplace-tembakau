@@ -142,7 +142,7 @@ class PemerintahController extends Controller
         $hasil_pengujian->storePubliclyAs('hasil_pengujians', $name, 'public');
         try {
             SertifikasiProduk::query()->where('id_sertifikasi',$validated['id_sertifikasi'])->update(['hasil_pengujian' => $name]);
-            return redirect('/pemerintah/sertifikasi')->with('success', 'Data akun berhasil diperbarui!');
+            return redirect('/pemerintah/sertifikasi')->with('success', 'Anda Telah Menyutujui Konfirmasi Sertifikasi!');
         } catch (QueryException $e) {
             return back()->with('failed','Data akun gagal diperbarui!');
         }

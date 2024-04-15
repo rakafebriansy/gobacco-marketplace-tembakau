@@ -8,11 +8,13 @@ use App\Models\JenisTembakau;
 use App\Models\Kecamatan;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
+use App\Models\StatusUji;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class PetaniController extends Controller
@@ -188,6 +190,75 @@ class PetaniController extends Controller
             'bukti_tf' => $name3,
         ]);
         
-        return redirect('/petani/sertifikasi')->with('success','Anda Telah Menyutujui Konfirmasi Sertifikasi!'); 
+        return redirect('/petani/sertifikasi')->with('success','Pengajuan Sertifikasi Produk Berhasil Diajukan
+        Mohon Menunggu Informasi Selanjutnya!'); 
+    }
+    public function mengeditPengajuanSertifikasi($id_sertifikasi)
+    {
+        $sertifikasi = SertifikasiProduk::select('sertifikasi_produks.*','jenis_pengujians.*','jenis_tembakaus.*','petani_tembakaus.*')
+        ->where('sertifikasi_produks.id_sertifikasi',$id_sertifikasi)
+        ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+        ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+        ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->first();
+        $jenis_pengujians = JenisPengujian::all();
+        if(isset($sertifikasi)) {
+            return view('petani.sertifikasi.edit', [
+                'title' => 'Petani | Edit Pengajuan',
+                'sertifikasi' => $sertifikasi,
+                'jenis_pengujians' => $jenis_pengujians
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMengeditPengajuanSertifikasi(Request $request)
+    {
+        $id_petani = $request->session()->get('id',null);
+        $validated = $request->validate([
+            'id_sertifikasi' => 'required',
+            'id_pengujian' => 'required',
+            'id_jenis_tembakau' => 'required',
+            'gmb_tembakau' => 'required',
+            'surat_izin_usaha' => 'required',
+            'tgl_serahsampel' => 'required',
+            'produk_tembakau' => 'required',
+            'berkas_lain' => 'required',
+            'bukti_tf' => 'required',
+        ]);
+
+        $jenis_tembakau = JenisTembakau::query()->where('jenis_tembakau', $validated['id_jenis_tembakau'])->first();
+        
+        $gmb_tembakau = $request->file('gmb_tembakau');
+        $name0 = $gmb_tembakau->getClientOriginalName();
+        $gmb_tembakau->storePubliclyAs('gmb_tembakaus', $name0, 'public');
+
+        $surat_izin_usaha = $request->file('surat_izin_usaha');
+        $name1 = $surat_izin_usaha->getClientOriginalName();
+        $surat_izin_usaha->storePubliclyAs('surat_izin_usahas', $name1, 'public');
+
+        $berkas_lain = $request->file('berkas_lain');
+        $name2 = $berkas_lain->getClientOriginalName();
+        $berkas_lain->storePubliclyAs('berkas_lains', $name2, 'public');
+        
+        $bukti_tf = $request->file('bukti_tf');
+        $name3 = $bukti_tf->getClientOriginalName();
+        $bukti_tf->storePubliclyAs('bukti_tfs', $name3, 'public');
+        SertifikasiProduk::query()->where('id_sertifikasi',$validated['id_sertifikasi'])->update([
+            'id_petani' => $id_petani,
+            'id_pengujian' => $validated['id_pengujian'],
+            'id_jenis_tembakau' => $jenis_tembakau->id_jenis_tembakau,
+            'gmb_tembakau' => $name0,
+            'id_status' => 3,
+            'surat_izin_usaha' => $name1,
+            'produk_tembakau' => $validated['produk_tembakau'],
+            'tgl_serahsampel' => $validated['tgl_serahsampel'],
+            'berkas_lain' => $name2,
+            'bukti_tf' => $name3,
+        ]);
+        redirect('/petani/sertifikasi')->with('success', 'Data berhasil disimpan');
+    }
+    public function downloadFile(string $folder_name, string $file_name)
+    {
+        return Storage::download('/' . $folder_name .'/' . $file_name);
     }
 }

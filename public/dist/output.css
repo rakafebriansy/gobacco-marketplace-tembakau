@@ -1131,6 +1131,10 @@ video {
   width: 4rem;
 }
 
+.w-\[\] {
+  width: ;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1487,6 +1491,30 @@ video {
   background-color: rgb(254 240 138 / var(--tw-bg-opacity));
 }
 
+.bg-\[FFB000\] {
+  background-color: FFB000;
+}
+
+.bg-\[\#FFB000\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 176 0 / var(--tw-bg-opacity));
+}
+
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
+.bg-lime-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(163 230 53 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-40 {
   --tw-bg-opacity: 0.4;
 }
@@ -1669,6 +1697,36 @@ video {
 .py-\[1\.4rem\] {
   padding-top: 1.4rem;
   padding-bottom: 1.4rem;
+}
+
+.py-\[1\.0rem\] {
+  padding-top: 1.0rem;
+  padding-bottom: 1.0rem;
+}
+
+.py-\[1rem\] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-\[0\.7rem\] {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.py-\[0\.rem\] {
+  padding-top: 0.rem;
+  padding-bottom: 0.rem;
+}
+
+.py-\[rem\] {
+  padding-top: rem;
+  padding-bottom: rem;
+}
+
+.py-\[1\/4rem\] {
+  padding-top: 1/4rem;
+  padding-bottom: 1/4rem;
 }
 
 .pb-32 {
@@ -2143,6 +2201,31 @@ video {
 .hover\:bg-rose-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(190 18 60 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#FFB000\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 176 0 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#FFB300\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 179 0 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-lime-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 242 100 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-80:hover {

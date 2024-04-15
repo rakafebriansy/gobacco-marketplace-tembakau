@@ -626,16 +626,24 @@ video {
   grid-column: span 8 / span 8;
 }
 
-.col-span-4 {
-  grid-column: span 4 / span 4;
-}
-
 .row-span-1 {
   grid-row: span 1 / span 1;
 }
 
 .row-span-2 {
   grid-row: span 2 / span 2;
+}
+
+.row-span-6 {
+  grid-row: span 6 / span 6;
+}
+
+.row-span-4 {
+  grid-row: span 4 / span 4;
+}
+
+.row-span-5 {
+  grid-row: span 5 / span 5;
 }
 
 .m-10 {
@@ -907,6 +915,66 @@ video {
   height: 100vh;
 }
 
+.h-\[\%\] {
+  height: %;
+}
+
+.h-\[15\%\] {
+  height: 15%;
+}
+
+.h-\[30\%\] {
+  height: 30%;
+}
+
+.h-\[50\%\] {
+  height: 50%;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.h-\[2rem\] {
+  height: 2rem;
+}
+
+.h-\[10\%\] {
+  height: 10%;
+}
+
+.h-\[0\%\] {
+  height: 0%;
+}
+
+.h-\[60\%\] {
+  height: 60%;
+}
+
+.h-\[20\] {
+  height: 20;
+}
+
+.h-\[90\%\] {
+  height: 90%;
+}
+
+.h-\[40\%\] {
+  height: 40%;
+}
+
+.h-\[3rem\] {
+  height: 3rem;
+}
+
+.h-\[1rem\] {
+  height: 1rem;
+}
+
+.h-\[4rem\] {
+  height: 4rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -995,6 +1063,74 @@ video {
   width: 100vw;
 }
 
+.w-\[20\$\] {
+  width: 20$;
+}
+
+.w-\[20\] {
+  width: 20;
+}
+
+.w-\[20\%\] {
+  width: 20%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[40\%\] {
+  width: 40%;
+}
+
+.w-\[12\] {
+  width: 12;
+}
+
+.w-\[2re\] {
+  width: 2re;
+}
+
+.w-\[2re\2c \] {
+  width: 2re,;
+}
+
+.w-\[2rem\] {
+  width: 2rem;
+}
+
+.w-\[0\%\] {
+  width: 0%;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[10\%\] {
+  width: 10%;
+}
+
+.w-\[30\%\] {
+  width: 30%;
+}
+
+.w-\[3rem\] {
+  width: 3rem;
+}
+
+.w-\[1rem\] {
+  width: 1rem;
+}
+
+.w-\[4rem\] {
+  width: 4rem;
+}
+
 .max-w-7xl {
   max-width: 80rem;
 }
@@ -1070,8 +1206,20 @@ video {
   grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
 .grid-rows-5 {
   grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-8 {
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+}
+
+.grid-rows-6 {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1124,6 +1272,10 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
 }
 
 .gap-y-4 {
@@ -1640,6 +1792,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {

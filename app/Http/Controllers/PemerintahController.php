@@ -120,6 +120,33 @@ class PemerintahController extends Controller
             return back()->with('failed','Data akun gagal diperbarui!');
         }
     }
+    public function mengunggahPengajuanSertifikasi($id_sertifikasi)
+    {
+        if(isset($id_sertifikasi)) {
+            return view('pemerintah.sertifikasi.unggah', [
+                'title' => 'Pemerintah | Mengunggah Hasil',
+                'id_sertifikasi' => $id_sertifikasi
+            ]);
+        } else {
+            return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
+        }
+    }
+    public function postMengunggahPengajuanSertifikasi(Request $request)
+    {
+        $validated = $request->validate([
+            'id_sertifikasi' => 'required',
+            'hasil_pengujian' => 'required'
+        ]);
+        $hasil_pengujian = $request->file('hasil_pengujian');
+        $name = $hasil_pengujian->getClientOriginalName();
+        $hasil_pengujian->storePubliclyAs('hasil_pengujians', $name, 'public');
+        try {
+            SertifikasiProduk::query()->where('id_sertifikasi',$validated['id_sertifikasi'])->update(['hasil_pengujian' => $name]);
+            return redirect('/pemerintah/sertifikasi')->with('success', 'Data akun berhasil diperbarui!');
+        } catch (QueryException $e) {
+            return back()->with('failed','Data akun gagal diperbarui!');
+        }
+    }
     public function downloadFile(string $folder_name, string $file_name)
     {
         return Storage::download('/' . $folder_name .'/' . $file_name);

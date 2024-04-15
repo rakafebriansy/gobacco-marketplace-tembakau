@@ -153,6 +153,7 @@ class PetaniController extends Controller
             'gmb_tembakau' => 'required',
             'surat_izin_usaha' => 'required',
             'tgl_serahsampel' => 'required',
+            'produk_tembakau' => 'required',
             'berkas_lain' => 'required',
             'bukti_tf' => 'required',
         ]);
@@ -181,6 +182,7 @@ class PetaniController extends Controller
             'gmb_tembakau' => $name0,
             'id_status' => 3,
             'surat_izin_usaha' => $name1,
+            'produk_tembakau' => $validated['produk_tembakau'],
             'tgl_serahsampel' => $validated['tgl_serahsampel'],
             'berkas_lain' => $name2,
             'bukti_tf' => $name3,

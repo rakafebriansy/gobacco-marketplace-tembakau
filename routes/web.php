@@ -43,6 +43,7 @@ Route::prefix('/pemerintah')->group(function(){
     Route::get('/sertifikasi',[PemerintahController::class,'melihatPengajuanSertifikasi']);
     Route::get('/buat/{id_sertifikasi}',[PemerintahController::class,'membuatPengajuanSertifikasi']);
     Route::post('/buat',[PemerintahController::class,'postMembuatPengajuanSertifikasi']);
+    Route::get('/download/{folder_name}/{file_name}', [PemerintahController::class, 'downloadFile']);
 });
 
 Route::prefix('/admin')->group(function(){

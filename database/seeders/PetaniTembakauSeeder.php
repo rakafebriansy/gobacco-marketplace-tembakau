@@ -14,10 +14,10 @@ class PetaniTembakauSeeder extends Seeder
     
     public function run(): void
     {
-        $this->call([
-            JenisKelaminSeeder::class,
-            KecamatanSeeder::class,
-        ]);
+        // $this->call([
+        //     JenisKelaminSeeder::class,
+        //     KecamatanSeeder::class,
+        // ]);
         $petani_tembakau = new PetaniTembakau();
         $petani_tembakau->id_petani = 1;
         $petani_tembakau->nama_petani = 'Maretha Nur Azizah';

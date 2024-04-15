@@ -36,6 +36,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->berkas_lain = fake()->word() . '.jpg';
         $sertifikasi->bukti_tf = fake()->word() . '.jpg';
         $sertifikasi->hasil_pengujian = fake()->word() . '.jpg';
+        $sertifikasi->produk_tembakau = fake()->word() . '.jpg';
         $sertifikasi->save();
         
         $sertifikasi = new SertifikasiProduk();
@@ -51,6 +52,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->berkas_lain = fake()->word() . '.jpg';
         $sertifikasi->bukti_tf = fake()->word() . '.jpg';
         $sertifikasi->hasil_pengujian = fake()->word() . '.jpg';
+        $sertifikasi->produk_tembakau = fake()->word() . '.jpg';
         $sertifikasi->save();
         
         $sertifikasi = new SertifikasiProduk();
@@ -66,6 +68,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->berkas_lain = fake()->word() . '.jpg';
         $sertifikasi->bukti_tf = fake()->word() . '.jpg';
         $sertifikasi->hasil_pengujian = fake()->word() . '.jpg';
+        $sertifikasi->produk_tembakau = fake()->word() . '.jpg';
         $sertifikasi->save();
     }
 }

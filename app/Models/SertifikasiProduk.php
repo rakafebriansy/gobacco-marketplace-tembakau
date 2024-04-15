@@ -24,6 +24,7 @@ class SertifikasiProduk extends Model
         'tgl_serahsampel',
         'berkas_lain',
         'bukti_tf',
+        'produk_tembakau',
         'hasil_pengujian',
         'gmb_tembakau',
     ];

@@ -25,7 +25,7 @@
                             </div>
                             Dashboard
                         </a>
-                        <a href="./pemerintah-masuk sertifikasi.html" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
+                        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-light-button hover:rounded-full">
                             <div class="">
                                 <img src="../images/Haruki Icons (2).svg" class="w-3/4">
                             </div>
@@ -65,7 +65,13 @@
                         <div class="">
                             <h3 class="text-2xl font-bold text-light-secondary text-opacity-70 pb-8">Data Sertifikasi Mutu Produk yang Telah Diajukan</h3>
                             <div class="h-96 w-auto bg-light-fill bg-opacity-50 rounded-xl mr-4">
-                                <div class=" overflow-hidden text-center mx-2">
+                                <div class=" overflow-hidden text-center mx-2 h-full">
+                                    @if($sertifikasis->isEmpty())
+                                    <div class="h-full flex items-center flex-col justify-center">
+                                        <img src="../images/blm aju.svg" class="w-24 mx-auto">
+                                        <h1 class="text-center font-medium text-light-abu">Belum ada pengajuan sertifikasi</h1>
+                                    </div>   
+                                    @else
                                     <table class="w-10%">
                                         <thead class="bg-['#C9D3B0']">
                                             <tr>
@@ -83,25 +89,26 @@
                                                     <td class="py-4 pr-2 border-b border-gray-200">{{ $sertifikasi->nama_petani }}</td>
                                                     <td class="py-4 pr-2 border-b border-gray-200">{{ $sertifikasi->jenis_tembakau }}</td>
                                                     <td class="py-4 pr-2 border-b border-gray-200 ">
-                                                        <img src="../images/{{ $sertifikasi->gmb_tembakau }}" class="ml-2">
+                                                        <img src="../storage/gmb_tembakaus/{{ $sertifikasi->gmb_tembakau }}" class="ml-2">
                                                     </td>
                                                     <td class="py-4 px-6 border-b border-gray-200">{{ $sertifikasi->surat_izin_usaha }}</td>
                                                     <td class="py-4 px-6 border-b border-gray-200">{{ $sertifikasi->jenis_pengujian }}</td>        
                                                     <td class="py-1 px-2 border-b border-gray-200">
                                                         <a href="./pemerintah-lihat akun.html" class="cursor-pointer rounded-full bg-light-iya px-2 py-1 text-xs font-normal text-light-putih hover:bg-green-600">Upload                              
                                                         </a>
-                                                        <button
-                                                            class="text-center font-normal bg-light-button text-light-putih py-1 px-2 rounded-full hover:bg-opacity-80 focus:shadow-outline ml-1 ">
+                                                        <a href="/pemerintah/buat/{{ $sertifikasi->id_sertifikasi }}"
+                                                            class="text-center font-norma cursor-pointer bg-light-button text-light-putih py-1 px-2 rounded-full hover:bg-opacity-80 focus:shadow-outline ml-1 ">
                                                             <span class=" text-xs">
                                                                 Lihat Detail
                                                             </span>
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
 
                                         </tbody>
                                     </table>
+                                    @endif
                                 </div>
                             </div>
                         </div>               
@@ -110,5 +117,91 @@
             </div>                   
         </div>
     </section>
+    @if (session('accepted'))
+    <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
+    
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('modelConfirm')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+
+                            
+                    </svg>
+                </button>
+            </div>
+    
+            <div class="p-6 pt-0 text-center">
+                <div class="mx-auto flex items-center justify-center h-32 w-32 rounded-full">
+                    <img src="../images/image 33.svg" class="">
+                </div>
+                
+                <h3 class="text-xl font-bold text-light-iya mt-5 ">BERHASIL!!</h3>
+                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Pengajuan Sertifikasi Produk Berhasil Diajukan
+                    Mohon Menunggu Informasi Selanjutnya! </h3>
+                <button type="button" onclick="closeModal('modelConfirm')"
+                    class="text-white bg-light-button hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
+                    Oke
+                </button>             
+            </div> 
+        </div>
+    </div>
+    @elseif (session('declined'))
+    <div id="modelDenied" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
+        <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
+    
+            <div class="flex justify-end p-2">
+                <button onclick="closeModal('modelDenied')" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+
+                            
+                    </svg>
+                </button>
+            </div>
+    
+            <div class="p-6 pt-0 text-center">
+                <div class="mx-auto flex items-center justify-center h-32 w-32 rounded-full">
+                    <img src="../images/tolak.svg" class="">
+                </div>
+                
+                <h3 class="text-xl font-bold text-light-secondary mt-5 ">Tolak</h3>
+                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Anda Telah Menolak Konfirmasi Sertifikasi!</h3>
+                <button type="button" onclick="closeModal('modelDenied')"
+                    class="text-white bg-light-button hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
+                    Oke
+                </button>             
+            </div> 
+        </div>
+    </div>
+    @endif
+    <script>
+            window.openModal = function(modalId) {
+                document.getElementById(modalId).style.display = 'block'
+                document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+            }
+        
+            window.closeModal = function(modalId) {
+                document.getElementById(modalId).style.display = 'none'
+                document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+            }
+        
+            document.onkeydown = function(event) {
+                event = event || window.event;
+                if (event.keyCode === 27) {
+                    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+                    let modals = document.getElementsByClassName('modal');
+                    Array.prototype.slice.call(modals).forEach(i => {
+                        i.style.display = 'none'
+                    })
+                }
+            };
+    </script>
 </body>
 </html>

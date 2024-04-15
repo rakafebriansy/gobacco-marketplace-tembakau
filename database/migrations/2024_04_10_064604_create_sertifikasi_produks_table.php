@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('berkas_lain',100)->nullable();
             $table->string('gmb_tembakau',100)->nullable(false);
             $table->string('bukti_tf',100)->nullable(false);
+            $table->string('produk_tembakau',100)->nullable(false);
             $table->string('hasil_pengujian',100)->nullable();
 
             $table->foreign('id_kecamatan')->on('kecamatans')->references('id_kecamatan');

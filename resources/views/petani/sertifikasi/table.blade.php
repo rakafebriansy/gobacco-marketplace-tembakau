@@ -80,12 +80,12 @@
                             </div>
                             
                             <div class="h-96 w-full bg-light-fill bg-opacity-50 rounded-xl mr-4">
-                                <div class=" overflow-hidden text-center mx-2">
+                                <div class=" overflow-hidden text-center mx-2 h-full">
                                     @if($sertifikasis->isEmpty())
-                                    <div class="py-20">
+                                    <div class="h-full flex items-center flex-col justify-center">
                                         <img src="../images/blm aju.svg" class="w-24 mx-auto">
                                         <h1 class="text-center font-medium text-light-abu">Belum ada pengajuan sertifikasi</h1>
-                                    </div>    
+                                    </div>   
                                     @else
                                         <table class="w-10%">
                                             <thead class="bg-['#C9D3B0']">
@@ -101,7 +101,7 @@
                                             <tbody>
                                                 @foreach ($sertifikasis as $key => $sertifikasi)
                                                 <tr class="{{ $key%2 == 1? 'bg-light-primary' : 'bg-light-secondary' }} {{ $key%2 == 0? 'text-light-putih' : 'text-light-secondary' }} bg-opacity-80 text-xs">
-                                                    <td class="py-4 pr-2">T{{ $sertifikasi->jenis_tembakau }}</td>
+                                                    <td class="py-4 pr-2">{{ $sertifikasi->jenis_tembakau }}</td>
                                                     <td class="flex justify-center py-4 pr-2 ">
                                                         <img src="../storage/gmb_tembakaus/{{ $sertifikasi->gmb_tembakau }}">
                                                     </td>
@@ -135,7 +135,7 @@
         </div>
     </section>
     @if (session('success'))
-    <div id="modelConfirm" class="fixed z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
+    <div id="modelConfirm" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-40 overflow-y-auto h-full w-full px-4 ">
         <div class="relative top-40 mx-auto shadow-xl rounded-xl bg-light-modal max-w-md">
     
             <div class="flex justify-end p-2">
@@ -153,11 +153,12 @@
     
             <div class="p-6 pt-0 text-center">
                 <div class="mx-auto flex items-center justify-center h-32 w-32 rounded-full">
-                    <img src="../images/image 14.svg" class="">
+                    <img src="../images/image 33.svg" class="">
                 </div>
                 
-                <h3 class="text-xl font-bold text-light-secondary mt-5 ">BERHASIL!!</h3>
-                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">{{ session('success') }}</h3>
+                <h3 class="text-xl font-bold text-light-iya mt-5 ">BERHASIL!!</h3>
+                <h3 class="text-sm font-normal text-light-secondary mt-2 mb-6">Pengajuan Sertifikasi Produk Berhasil Diajukan
+                    Mohon Menunggu Informasi Selanjutnya! </h3>
                 <button type="button" onclick="closeModal('modelConfirm')"
                     class="text-white bg-light-button hover:opacity-80 focus:ring-2 focus:ring-white font-medium rounded-full text-base inline-flex items-center px-8 py-2 text-center mr-2">
                     Oke

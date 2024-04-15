@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PemerintahController extends Controller
 {
@@ -90,8 +91,11 @@ class PemerintahController extends Controller
     }
     public function membuatPengajuanSertifikasi($id_sertifikasi)
     {
-        $sertifikasi = SertifikasiProduk::find($id_sertifikasi);
-        var_dump($sertifikasi);
+        $sertifikasi = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.*','jenis_tembakaus.*','petani_tembakaus.*')
+        ->where('sertifikasi_produks.id_sertifikasi',$id_sertifikasi)
+        ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
+        ->join('jenis_pengujians','jenis_pengujians.id_pengujian','=','sertifikasi_produks.id_pengujian')
+        ->join('petani_tembakaus','petani_tembakaus.id_petani','=','sertifikasi_produks.id_petani')->first();
         if(isset($sertifikasi)) {
             return view('pemerintah.sertifikasi.form', [
                 'title' => 'Pemerintah | Pengajuan Sertifikasi',
@@ -103,13 +107,21 @@ class PemerintahController extends Controller
     }
     public function postMembuatPengajuanSertifikasi(Request $request)
     {
-        $status_fix = $request->input('status');
+        $status_fix = $request->input('id_status');
         $id_sertifikasi = $request->input('id_sertifikasi');
         try {
             SertifikasiProduk::query()->where('id_sertifikasi',$id_sertifikasi)->update(['id_status' => intval($status_fix)]);
-            return redirect('/pemerintah/sertifikasi/buat/' . $id_sertifikasi)->with('success', 'Data akun berhasil diperbarui!');
+            if($status_fix == '1') {
+                return redirect('/pemerintah/sertifikasi/')->with('accepted', 'Data akun berhasil diperbarui!');
+            } else if($status_fix == '2') {
+                return redirect('/pemerintah/sertifikasi/')->with('declined', 'Data akun berhasil diperbarui!');
+            }
         } catch (QueryException $e) {
             return back()->with('failed','Data akun gagal diperbarui!');
         }
+    }
+    public function downloadFile(string $folder_name, string $file_name)
+    {
+        return Storage::download('/' . $folder_name .'/' . $file_name);
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sertifikasi_produks', function (Blueprint $table) {
             $table->bigIncrements('id_sertifikasi')->nullable(false);
-            $table->unsignedBigInteger('id_kecamatan')->nullable(false);
+            $table->unsignedBigInteger('id_kecamatan')->nullable();
             $table->unsignedBigInteger('id_petani')->nullable(false);
             $table->unsignedBigInteger('id_pengujian')->nullable(false);
             $table->unsignedBigInteger('id_jenis_tembakau')->nullable(false);
@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('surat_izin_usaha',100)->nullable(false);
             $table->date('tgl_serahsampel')->nullable(false);
             $table->string('berkas_lain',100)->nullable();
+            $table->string('gmb_tembakau',100)->nullable(false);
             $table->string('bukti_tf',100)->nullable(false);
-            $table->string('hasil_pengujian',100)->nullable(false);
+            $table->string('hasil_pengujian',100)->nullable();
 
             $table->foreign('id_kecamatan')->on('kecamatans')->references('id_kecamatan');
             $table->foreign('id_petani')->on('petani_tembakaus')->references('id_petani');

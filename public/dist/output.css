@@ -554,6 +554,10 @@ video {
   --tw-contain-style:  ;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1058,6 +1062,10 @@ video {
   grid-template-columns: repeat(9, minmax(0, 1fr));
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .grid-rows-5 {
   grid-template-rows: repeat(5, minmax(0, 1fr));
 }
@@ -1491,6 +1499,11 @@ video {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+.py-\[1\.4rem\] {
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
 }
 
 .pb-32 {

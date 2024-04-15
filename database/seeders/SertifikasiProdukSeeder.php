@@ -31,6 +31,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->id_status = 3;
         $sertifikasi->id_jenis_tembakau = 1;
         $sertifikasi->surat_izin_usaha = 'surat001' . '.jpg';
+        $sertifikasi->gmb_tembakau = 'Versicolor.png';
         $sertifikasi->tgl_serahsampel = fake()->date();
         $sertifikasi->berkas_lain = fake()->word() . '.jpg';
         $sertifikasi->bukti_tf = fake()->word() . '.jpg';
@@ -43,6 +44,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->id_petani = 1;
         $sertifikasi->id_pengujian = 2;
         $sertifikasi->id_status = 3;
+        $sertifikasi->gmb_tembakau = 'Virginica.png';
         $sertifikasi->id_jenis_tembakau = 2;
         $sertifikasi->surat_izin_usaha = 'surat002' . '.jpg';
         $sertifikasi->tgl_serahsampel = fake()->date();
@@ -57,6 +59,7 @@ class SertifikasiProdukSeeder extends Seeder
         $sertifikasi->id_petani = 1;
         $sertifikasi->id_status = 3;
         $sertifikasi->id_pengujian = 1;
+        $sertifikasi->gmb_tembakau = 'Setosa.png';
         $sertifikasi->id_jenis_tembakau = 2;
         $sertifikasi->surat_izin_usaha = 'surat003' . '.jpg';
         $sertifikasi->tgl_serahsampel = fake()->date();

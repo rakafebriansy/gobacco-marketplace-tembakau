@@ -11,8 +11,13 @@ class PetaniTembakauSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    
     public function run(): void
     {
+        $this->call([
+            JenisKelaminSeeder::class,
+            KecamatanSeeder::class,
+        ]);
         $petani_tembakau = new PetaniTembakau();
         $petani_tembakau->id_petani = 1;
         $petani_tembakau->nama_petani = 'Maretha Nur Azizah';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisKelamin;
 use App\Models\JenisPengujian;
+use App\Models\JenisTembakau;
 use App\Models\Kecamatan;
 use App\Models\PetaniTembakau;
 use App\Models\SertifikasiProduk;
@@ -112,6 +113,7 @@ class PetaniController extends Controller
     {
         $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
+            $petani = PetaniTembakau::find($id_petani);
             $sertifikasis = SertifikasiProduk::query()->select('sertifikasi_produks.*','jenis_pengujians.jenis_pengujian','jenis_tembakaus.*','status_ujis.status_uji','petani_tembakaus.nama_petani')
             ->where('sertifikasi_produks.id_petani',$id_petani)
             ->join('jenis_tembakaus','jenis_tembakaus.id_jenis_tembakau','=','sertifikasi_produks.id_jenis_tembakau')
@@ -121,6 +123,7 @@ class PetaniController extends Controller
             return view('petani.sertifikasi.table', [
                 'title' => 'Petani | Sertifikasi',
                 'sertifikasis' => $sertifikasis,
+                'petani' => $petani
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -130,12 +133,12 @@ class PetaniController extends Controller
     {
         $id_petani = $request->session()->get('id',null);
         if(isset($id_petani)) {
+            $jenis_pengujians = JenisPengujian::all();
             $petani = PetaniTembakau::query()->find($id_petani);
-            $kecamatan = Kecamatan::query()->find($petani->id_kecamatan);
             return view('petani.sertifikasi.form', [
                 'title' => 'Petani | Pengajuan Sertifikasi',
-                'petani' => $petani,
-                'kecamatan' => $kecamatan,
+                'jenis_pengujians' => $jenis_pengujians,
+                'petani' => $petani
             ]);
         } else {
             return redirect('/')->with('failed','Silahkan login terlebih dahulu!');
@@ -143,17 +146,23 @@ class PetaniController extends Controller
     }
     public function postMembuatPengajuanSertifikasi(Request $request)
     {
+        $id_petani = $request->session()->get('id',null);
         $validated = $request->validate([
-            'id_kecamatan' => 'required',
-            'id_petani' => 'required',
             'id_pengujian' => 'required',
             'id_jenis_tembakau' => 'required',
-            'id_status' => 'required',
+            'gmb_tembakau' => 'required',
             'surat_izin_usaha' => 'required',
             'tgl_serahsampel' => 'required',
             'berkas_lain' => 'required',
             'bukti_tf' => 'required',
         ]);
+
+        $jenis_tembakau = JenisTembakau::query()->where('jenis_tembakau', $validated['id_jenis_tembakau'])->first();
+        
+        $gmb_tembakau = $request->file('gmb_tembakau');
+        $name0 = $gmb_tembakau->getClientOriginalName();
+        $gmb_tembakau->storePubliclyAs('gmb_tembakaus', $name0, 'public');
+
         $surat_izin_usaha = $request->file('surat_izin_usaha');
         $name1 = $surat_izin_usaha->getClientOriginalName();
         $surat_izin_usaha->storePubliclyAs('surat_izin_usahas', $name1, 'public');
@@ -165,7 +174,18 @@ class PetaniController extends Controller
         $bukti_tf = $request->file('bukti_tf');
         $name3 = $bukti_tf->getClientOriginalName();
         $bukti_tf->storePubliclyAs('bukti_tfs', $name3, 'public');
+        SertifikasiProduk::create([
+            'id_petani' => $id_petani,
+            'id_pengujian' => $validated['id_pengujian'],
+            'id_jenis_tembakau' => $jenis_tembakau->id_jenis_tembakau,
+            'gmb_tembakau' => $name0,
+            'id_status' => 3,
+            'surat_izin_usaha' => $name1,
+            'tgl_serahsampel' => $validated['tgl_serahsampel'],
+            'berkas_lain' => $name2,
+            'bukti_tf' => $name3,
+        ]);
         
-        return "Surat: $name1 Berkas: $name2 Bukti: $name3"; 
+        return redirect('/petani/sertifikasi')->with('success','Anda Telah Menyutujui Konfirmasi Sertifikasi!'); 
     }
 }

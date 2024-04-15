@@ -24,7 +24,8 @@ class SertifikasiProduk extends Model
         'tgl_serahsampel',
         'berkas_lain',
         'bukti_tf',
-        'hasil_pengujian'
+        'hasil_pengujian',
+        'gmb_tembakau',
     ];
     public function jenisTembakau(): BelongsTo
     {

@@ -51,7 +51,7 @@
                 <div class=" col-span-2 bg-light-secondary flex flex-col justify-between relative">
                     <div>
                         <div class="pb-32"></div>
-                        <a href="#" class="flex items-center px-4 py-2  text-light-primary hover:bg-light-button hover:rounded-full">
+                        <a href="/pemerintah/dashboard" class="flex items-center px-4 py-2  text-light-primary hover:bg-light-button hover:rounded-full">
                             <div class="">
                                 <img src="../images/Haruki Icons.svg" class="w-3/4">
                             </div>

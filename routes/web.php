@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 Route::get('/register', [PetaniController::class,'register']);
@@ -28,6 +28,11 @@ Route::post('/login', [LoginController::class,'postLogin']);
 Route::get('/logout', [LoginController::class,'logout']);
 
 Route::prefix('/petani')->group(function() {
+    Route::get('/dashboard',function(){
+        return view('petani.dashboard', [
+            'title' => 'Petani | Dashboard'
+        ]);
+    });
     Route::get('/akun',[PetaniController::class,'melihatDataAkun']);
     Route::get('/ubah',[PetaniController::class,'mengubahDataAkun']);
     Route::patch('/ubah',[PetaniController::class,'postMengubahDataAkun']);

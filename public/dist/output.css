@@ -799,6 +799,10 @@ video {
   margin-top: 2rem;
 }
 
+.ml-12 {
+  margin-left: 3rem;
+}
+
 .box-border {
   box-sizing: border-box;
 }
@@ -1801,6 +1805,30 @@ video {
   padding-top: 2rem;
 }
 
+.pl-14 {
+  padding-left: 3.5rem;
+}
+
+.pl-20 {
+  padding-left: 5rem;
+}
+
+.pl-24 {
+  padding-left: 6rem;
+}
+
+.pl-28 {
+  padding-left: 7rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pr-44 {
+  padding-right: 11rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -2098,6 +2126,24 @@ video {
 .placeholder\:text-xs::placeholder {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.placeholder\:text-sm::-moz-placeholder {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.placeholder\:text-sm::placeholder {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.placeholder\:font-medium::-moz-placeholder {
+  font-weight: 500;
+}
+
+.placeholder\:font-medium::placeholder {
+  font-weight: 500;
 }
 
 .placeholder\:text-light-hitam::-moz-placeholder {

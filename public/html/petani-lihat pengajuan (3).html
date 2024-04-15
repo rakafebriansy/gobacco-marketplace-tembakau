@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Gobacco</title>
+    <link rel="stylesheet" href="../dist/output.css">
+</head>
+
+<body>
+    <section class="font-poppins">
+        <div class="bg-light-primary relative">
+            <div class=" bg-light-secondary absolute top-0 w-full z-10 pl-56">
+                <ol class="flex items-center w-full mb-4 py-10">
+                    <li
+                        class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-light-primary after:border-4 after:inline-block ">
+                        <div
+                            class="flex items-center justify-center w-10 h-10 bg-light-secondary border-2 border-light-primary rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">1</h1>
+                        </div>
+                    </li>
+
+                    <li
+                        class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-light-primary after:border-4 after:inline-block">
+                        <div
+                            class="flex items-center justify-center w-10 h-10 bg-light-secondary border-2 border-light-primary rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">2</h1>
+                        </div>
+                    </li>
+                    <li class="flex items-center w-full">
+                        <div
+                            class="flex items-center justify-center w-10 h-10 bg-light-fill rounded-full lg:h-12 lg:w-12 shrink-0">
+                            <h1 class="text-light-primary text-2xl font-semibold">3</h1>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <div class="w-full h-screen bg-light-primary">
+                <div class="bottom-0 h-full pt-40">
+                    <h3 class="mb-10 text-3xl text-center font-bold leading-none text-light-secondary">Form Pengajuan
+                        Sertifikasi</h3>
+                    <div class="grid grid-flow-col grid-cols-7 gap-y-4">
+                        <div class="col-span-1"></div>
+                        <div class="col-span-2 grid grid-rows-5">
+                            <div class="row-span-1">
+                                <label for="nama" class="text-base font-medium text-light-secondary block mb-2 ">Pilih Jenis Pengujian Sertifikasi</label>
+                                <input type="dropdown" name="nama" id="nama"
+                                    class="shadow-sm bg-light-fill w-full  bg-opacity-50 text-light-secondary rounded-lg block p-2.5 focus:outline-slate-400 placeholder:text-light-secondary placeholder:font-medium placeholder:text-sm" placeholder="Pengujian Standar Nasional Indonesia"
+                                    >
+                            </div>
+                            <div class="row-span-1">
+                                <label for="no-hp" class="text-base font-medium text-light-secondary block mb-2">Harga Pengujian Sertifikasi</label>
+                                <input type="number" name="no-hp" id="no-hp"
+                                    class="shadow-sm bg-light-fill w-full bg-opacity-50 text-light-secondary rounded-lg block p-2.5 focus:outline-slate-400 placeholder:text-light-secondary placeholder:font-medium placeholder:text-sm" placeholder="Rp 1.080.000"
+                                    >
+                            </div>
+                            <div class="row-span-2">
+                                <label for="alamat" class="text-base font-medium text-light-secondary block mb-2">Tanggal Penyerahan Sampel</label>
+                                <input type="text" name="alamat" id="alamat"
+                                    class="shadow-sm bg-light-fill w-full bg-opacity-50 text-light-secondary rounded-lg block p-2.5 focus:outline-slate-400 placeholder:text-light-secondary placeholder:font-medium placeholder:text-sm" placeholder="10/05/2024"
+                                    >
+                            </div>
+                            <div class="row-span-1 flex justify-start items-center">
+                                <div
+                                    class=" cursor-pointer rounded-full w-[11rem] text-center bg-light-primary px-10 py-4 text-sm font-bold text-light-button border border-3 border-light-button hover:bg-light-button hover:text-light-primary">
+                                    <a href="./pemerintah-lihat akun.html">Sebelumnya
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-1"></div>
+                        <div class="col-span-2 grid grid-rows-5">
+                            <div class="row-span-2">                               
+                                <label class="text-base font-medium text-light-secondary block mb-2">Bukti Pembayaran </label>
+                                <div class="h-[80%] w-full bg-light-fill bg-opacity-50 text-light-secondary rounded-lg p-2.5 box-border focus:outline-slate-400">
+                                    <h2 class="font-semibold text-light-secondary pl-28 pt-8">buktitf.png</h2>
+                                    <div class="pl-32 pt-8">
+                                        
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row-span-2">
+                                <label for="alamat" class="text-sm font-normal text-light-secondary block mb-2">Catatan:</label>
+                                <h1 class="text-xs font-normal">Penyerahan sampel produk tembakau dapat dilaksankan ketika pembayaran pengajuan sertifikasi dikonfirmasi oleh pemerintah.</h1>
+                            </div>
+                            <div class="row-span-1 flex justify-end items-center">
+                                <button
+                                    class="text-center text-sm font-bold bg-red-400 text-light-tidak py-4 px-4 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
+                                    Batalkan Pengajuan
+                                </button>
+                                <button
+                                    class="ml-12 text-center text-sm font-bold bg-light-button text-light-putih py-4 px-10 rounded-full border hover:bg-opacity-80 focus:shadow-outline ">
+                                    Kirim
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
